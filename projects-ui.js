@@ -1,23 +1,23 @@
 /**
  * Projects / Selected Work — data-driven render.
  * Reads PROJECTS from data/projects.js (Phase 3 architecture) and builds the
- * featured project, category filter bar, and asymmetric grid entirely from
- * that data. No project title/description/link is hardcoded here.
+ * category filter bar and a uniform project grid entirely from that data.
+ * No project title/description/link is hardcoded here. Every card shares
+ * the exact same tile structure — no featured/large/small variants
+ * (Phase 4 brand-positioning + visual redesign).
  */
 import { PROJECTS, PROJECT_CATEGORIES } from "./data/projects.js";
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const filterbarEl = document.getElementById("swFilterbar");
-const featuredEl = document.getElementById("swFeatured");
 const gridEl = document.getElementById("swGrid");
 const emptyEl = document.getElementById("swEmpty");
 
-if (filterbarEl && featuredEl && gridEl) {
+if (filterbarEl && gridEl) {
   const svg = {
     arrow: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>`,
     external: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>`,
-    github: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>`,
   };
 
   const escapeHtml = (str) =>
@@ -28,10 +28,13 @@ if (filterbarEl && featuredEl && gridEl) {
     return link.external ? svg.external : svg.arrow;
   }
 
-  /** Primary destination for a project, in priority order. */
+  /**
+   * Primary — and only — destination for a project, in priority order.
+   * Label reflects exactly what the link resolves to; never a fake CTA.
+   */
   function primaryLink(project) {
-    if (project.caseStudy) return { href: project.caseStudy, label: "View Case Study", external: false };
-    if (project.liveUrl) return { href: project.liveUrl, label: "Visit Live Site", external: true };
+    if (project.caseStudy) return { href: project.caseStudy, label: "View Project", external: false };
+    if (project.liveUrl) return { href: project.liveUrl, label: "View Live Project", external: true };
     if (project.githubUrl) return { href: project.githubUrl, label: "View on GitHub", external: true };
     return null;
   }
@@ -42,9 +45,10 @@ if (filterbarEl && featuredEl && gridEl) {
       : "";
   }
 
-  /** Year/location only — category is always shown separately. Never invents a missing value. */
-  function subMeta(project) {
-    return [project.yearLabel || project.year, project.country].filter(Boolean).join(" — ");
+  /** Category is always shown; year/country only when the data actually has it — never invented. */
+  function metaLine(project) {
+    const extra = [project.yearLabel || project.year, project.country].filter(Boolean).join(" — ");
+    return extra ? `${project.category} — ${extra}` : project.category;
   }
 
   function imageBlock(project, { eager = false } = {}) {
@@ -57,7 +61,7 @@ if (filterbarEl && featuredEl && gridEl) {
         <img
           src="${escapeHtml(project.image)}"
           alt="${alt}"
-          width="1200" height="620"
+          width="1200" height="750"
           loading="${eager ? "eager" : "lazy"}"
           decoding="async"
           ${eager ? 'fetchpriority="high"' : ""}
@@ -66,93 +70,44 @@ if (filterbarEl && featuredEl && gridEl) {
       </div>`;
   }
 
-  // ── Featured project ──────────────────────────────────────────
-  function renderFeatured() {
-    const featured = PROJECTS.filter((p) => p.featured).sort((a, b) => a.priority - b.priority)[0];
-    if (!featured) {
-      featuredEl.innerHTML = "";
-      return null;
-    }
-    const link = primaryLink(featured);
-    const tech = techLine(featured);
-    const meta = subMeta(featured);
-
-    featuredEl.innerHTML = `
-      <article class="sw-featured reveal-up" style="--d:340ms" data-slug="${escapeHtml(featured.slug)}">
-        <div class="sw-featured-visual">
-          ${
-            link
-              ? `<a href="${escapeHtml(link.href)}" class="sw-featured-visual-link" ${link.external ? 'target="_blank" rel="noopener noreferrer"' : ""} aria-label="${link.label} — ${escapeHtml(featured.title)}">${imageBlock(featured, { eager: true })}</a>`
-              : imageBlock(featured, { eager: true })
-          }
-        </div>
-        <div class="sw-featured-info">
-          <span class="sw-index" aria-hidden="true">01</span>
-          <span class="sw-eyebrow">Featured — ${escapeHtml(featured.category)}</span>
-          <h3 class="sw-featured-title">${escapeHtml(featured.title)}</h3>
-          <p class="sw-featured-desc">${escapeHtml(featured.shortDescription || featured.description || "")}</p>
-          <div class="sw-featured-foot">
-            ${tech ? `<span class="sw-tech">${escapeHtml(tech)}</span>` : ""}
-            ${meta ? `<span class="sw-meta">${escapeHtml(meta)}</span>` : ""}
-          </div>
-          <div class="sw-links">
-            ${
-              link
-                ? `<a class="sw-cta" href="${escapeHtml(link.href)}" ${link.external ? 'target="_blank" rel="noopener noreferrer"' : ""}>${escapeHtml(link.label)} <span class="sw-cta-arrow">${ctaIcon(link)}</span></a>`
-                : ""
-            }
-            ${
-              featured.githubUrl && !(link && link.href === featured.githubUrl)
-                ? `<a class="sw-icon-link" href="${escapeHtml(featured.githubUrl)}" target="_blank" rel="noopener noreferrer" aria-label="View ${escapeHtml(featured.title)} on GitHub">${svg.github}</a>`
-                : ""
-            }
-          </div>
-        </div>
-      </article>`;
-
-    return featured.slug;
-  }
-
-  // ── Grid ───────────────────────────────────────────────────────
-  const SIZE_CYCLE = ["lg", "sm", "sm", "lg", "full"];
-
+  // ── Uniform grid ──────────────────────────────────────────────
   function cardHtml(project, index) {
-    const size = SIZE_CYCLE[index % SIZE_CYCLE.length];
     const link = primaryLink(project);
     const tech = techLine(project);
-    const meta = subMeta(project);
-
-    return `
-      <article class="sw-card sw-card--${size} sw-reveal" style="--d:${Math.min(index, 6) * 60}ms" data-category="${escapeHtml(project.categories.join(","))}" data-slug="${escapeHtml(project.slug)}">
-        ${
-          link
-            ? `<a class="sw-card-visual-link" href="${escapeHtml(link.href)}" ${link.external ? 'target="_blank" rel="noopener noreferrer"' : ""} aria-label="${link.label} — ${escapeHtml(project.title)}">${imageBlock(project)}</a>`
-            : imageBlock(project)
-        }
+    const meta = metaLine(project);
+    const number = String(index + 1).padStart(2, "0");
+    const cardInner = `
+        <div class="sw-thumb-wrap">
+          ${imageBlock(project, { eager: index < 3 })}
+          ${
+            link
+              ? `<span class="sw-thumb-view"><span class="sw-thumb-view-label">${escapeHtml(link.label)} <span class="sw-cta-arrow">${ctaIcon(link)}</span></span></span>`
+              : ""
+          }
+        </div>
         <div class="sw-card-body">
-          <span class="sw-card-cat">${escapeHtml(project.category)}${meta ? ` <span class="sw-card-meta">— ${escapeHtml(meta)}</span>` : ""}</span>
+          <div class="sw-card-meta-row">
+            <span class="sw-card-num" aria-hidden="true">${number}</span>
+            <span class="sw-card-cat">${escapeHtml(meta)}</span>
+          </div>
           <h3 class="sw-card-title">${escapeHtml(project.title)}</h3>
           <p class="sw-card-desc">${escapeHtml(project.shortDescription || project.description || "")}</p>
           ${tech ? `<span class="sw-card-tech">${escapeHtml(tech)}</span>` : ""}
-          <div class="sw-links">
-            ${
-              link
-                ? `<a class="sw-card-cta" href="${escapeHtml(link.href)}" ${link.external ? 'target="_blank" rel="noopener noreferrer"' : ""}>View Project <span class="sw-cta-arrow">${ctaIcon(link)}</span></a>`
-                : ""
-            }
-            ${
-              project.githubUrl && !(link && link.href === project.githubUrl)
-                ? `<a class="sw-icon-link" href="${escapeHtml(project.githubUrl)}" target="_blank" rel="noopener noreferrer" aria-label="View ${escapeHtml(project.title)} on GitHub">${svg.github}</a>`
-                : ""
-            }
-          </div>
-        </div>
+          ${link ? `<span class="sw-card-cta">${escapeHtml(link.label)} <span class="sw-cta-arrow">${ctaIcon(link)}</span></span>` : ""}
+        </div>`;
+
+    return `
+      <article class="sw-card sw-reveal" style="--d:${Math.min(index, 8) * 60}ms" data-category="${escapeHtml(project.categories.join(","))}" data-slug="${escapeHtml(project.slug)}">
+        ${
+          link
+            ? `<a class="sw-card-link" href="${escapeHtml(link.href)}" ${link.external ? 'target="_blank" rel="noopener noreferrer"' : ""} aria-label="${escapeHtml(link.label)} — ${escapeHtml(project.title)}">${cardInner}</a>`
+            : `<div class="sw-card-link">${cardInner}</div>`
+        }
       </article>`;
   }
 
-  function renderGrid(category, featuredSlug) {
+  function renderGrid(category) {
     const list = PROJECTS
-      .filter((p) => p.slug !== featuredSlug)
       .filter((p) => category === "All" || p.categories.includes(category))
       .sort((a, b) => a.priority - b.priority);
 
@@ -176,7 +131,7 @@ if (filterbarEl && featuredEl && gridEl) {
     return counts;
   }
 
-  function renderFilterbar(featuredSlug) {
+  function renderFilterbar() {
     const counts = categoryCounts();
     const categories = PROJECT_CATEGORIES.filter((c) => c === "All" || counts.get(c) > 0);
 
@@ -202,12 +157,12 @@ if (filterbarEl && featuredEl && gridEl) {
 
         const category = btn.dataset.category;
         if (prefersReducedMotion) {
-          renderGrid(category, featuredSlug);
+          renderGrid(category);
           return;
         }
         gridEl.classList.add("is-transitioning");
         window.setTimeout(() => {
-          renderGrid(category, featuredSlug);
+          renderGrid(category);
           gridEl.classList.remove("is-transitioning");
         }, 180);
       });
@@ -237,9 +192,6 @@ if (filterbarEl && featuredEl && gridEl) {
   // ── Init ──────────────────────────────────────────────────────
   // Note: the static intro (.sw-intro / .sw-filterbar) already exists at
   // parse time and is handled by script.js's global reveal observer.
-  // Only the elements this module injects need their own observer here.
-  const featuredSlug = renderFeatured();
-  renderFilterbar(featuredSlug);
-  renderGrid("All", featuredSlug);
-  observeReveal(document.querySelectorAll(".sw-featured"));
+  renderFilterbar();
+  renderGrid("All");
 }

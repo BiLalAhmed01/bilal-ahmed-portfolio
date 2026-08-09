@@ -643,6 +643,16 @@ body:has(button:hover) .cursor-ring {
   letter-spacing: var(--ls-label);
   text-transform: uppercase;
   color: var(--color-gold);
+  margin-bottom: var(--space-2);
+}
+
+.hero-eyebrow-secondary {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--color-text-dim);
   margin-bottom: var(--space-4);
 }
 

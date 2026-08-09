@@ -306,10 +306,23 @@ export const PROJECTS = [
 /**
  * Categories surfaced for the future filter UI (Phase 4). "All" plus every
  * category actually used by a project above — no empty categories invented.
+ *
+ * Ordered to match the site's Web-first brand positioning (Web Development
+ * primary, AI & Automation secondary): any category not listed here falls
+ * back to alphabetical order after the ones that are.
  */
+const CATEGORY_ORDER = ["Web", "SaaS", "AI & Automation", "AI & ML", "Mobile", "Engineering"];
+
 export const PROJECT_CATEGORIES = [
   "All",
-  ...Array.from(new Set(PROJECTS.flatMap((p) => p.categories))).sort(),
+  ...Array.from(new Set(PROJECTS.flatMap((p) => p.categories))).sort((a, b) => {
+    const ai = CATEGORY_ORDER.indexOf(a);
+    const bi = CATEGORY_ORDER.indexOf(b);
+    if (ai === -1 && bi === -1) return a.localeCompare(b);
+    if (ai === -1) return 1;
+    if (bi === -1) return -1;
+    return ai - bi;
+  }),
 ];
 
 export function getProjectBySlug(slug) {

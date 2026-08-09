@@ -45,16 +45,44 @@ if (window.matchMedia('(hover: hover)').matches && !prefersReducedMotion) {
 /* ──────────────────────────────────────────
    NAV — SCROLL SURFACE + ACTIVE LINK
 ────────────────────────────────────────── */
-const nav        = document.getElementById('nav');
-const navLinks   = document.querySelectorAll('.nav-link');
-const sections   = document.querySelectorAll('section[id]');
-const hamburger  = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-const mobLinks   = document.querySelectorAll('.mob-link');
+const nav            = document.getElementById('nav');
+const navLinks       = document.querySelectorAll('.nav-link');
+const sections       = document.querySelectorAll('section[id]');
+const hamburger      = document.getElementById('hamburger');
+const mobileMenu     = document.getElementById('mobileMenu');
+const mobLinks       = document.querySelectorAll('.mob-link');
+const scrollProgress = document.getElementById('scrollProgress');
+
+let lastScrollY = window.scrollY;
+let scrollTicking = false;
+
+function handleScroll() {
+  const y = window.scrollY;
+
+  nav.classList.toggle('scrolled', y > 60);
+  // Only recede once actually past the nav (avoids flicker right at top);
+  // direction alone decides whether it recedes further or restores.
+  if (y > nav.offsetHeight) {
+    nav.classList.toggle('nav--receded', y > lastScrollY);
+  } else {
+    nav.classList.remove('nav--receded');
+  }
+  lastScrollY = y;
+
+  if (scrollProgress) {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? Math.min(y / max, 1) : 0;
+    scrollProgress.style.transform = `scaleX(${pct})`;
+  }
+
+  updateActiveLink();
+  scrollTicking = false;
+}
 
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-  updateActiveLink();
+  if (scrollTicking) return;
+  scrollTicking = true;
+  requestAnimationFrame(handleScroll);
 }, { passive: true });
 
 function updateActiveLink() {
@@ -68,7 +96,7 @@ function updateActiveLink() {
     link.classList.toggle('active', link.dataset.section === current);
   });
 }
-updateActiveLink();
+handleScroll();
 
 // Smooth anchor scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -193,6 +221,7 @@ document.querySelectorAll('.hero .reveal-up, .hero .reveal-right').forEach((el, 
 const orb1 = document.querySelector('.orb-1');
 const orb2 = document.querySelector('.orb-2');
 const orb3 = document.querySelector('.orb-3');
+const heroFlowDiagram = document.querySelector('.flow-diagram');
 
 let mouseX = 0, mouseY = 0;
 
@@ -206,6 +235,8 @@ if (window.matchMedia('(hover: hover)').matches && !prefersReducedMotion) {
     if (orb1) orb1.style.transform = `translate(${mouseX * 0.5}px, ${mouseY * 0.5}px)`;
     if (orb2) orb2.style.transform = `translate(${-mouseX * 0.3}px, ${-mouseY * 0.3}px)`;
     if (orb3) orb3.style.transform = `translate(${mouseX * 0.2}px, ${mouseY * 0.2}px)`;
+    // Hero visual: same rAF loop, capped well under the 6px ceiling.
+    if (heroFlowDiagram) heroFlowDiagram.style.transform = `translate(${mouseX * 0.15}px, ${mouseY * 0.15}px)`;
     requestAnimationFrame(moveOrbs);
   }
   moveOrbs();

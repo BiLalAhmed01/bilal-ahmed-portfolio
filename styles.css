@@ -273,6 +273,12 @@ body:has(button:hover) .cursor-ring {
   height: var(--nav-h);
   transition: background 0.4s var(--ease), border-color 0.4s;
   border-bottom: 1px solid transparent;
+  animation: navEnter 0.6s var(--ease-out) both;
+}
+
+@keyframes navEnter {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .nav.scrolled {
@@ -280,6 +286,12 @@ body:has(button:hover) .cursor-ring {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-color: var(--color-border);
+}
+
+/* Slightly recedes while actively scrolling down (past the nav's own
+   height, so it never flickers right at the top); restores on scroll up. */
+.nav.nav--receded {
+  background: rgba(var(--bg-rgb), 0.65);
 }
 
 .nav-inner {
@@ -334,6 +346,23 @@ body:has(button:hover) .cursor-ring {
   letter-spacing: 0.01em;
 }
 
+.nav-link::before {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  width: 0;
+  height: 1.5px;
+  background: var(--color-gold);
+  border-radius: 1px;
+  transform: translateX(-50%);
+  transition: width 220ms var(--ease-out);
+}
+
+.nav-link:hover::before {
+  width: calc(100% - 28px);
+}
+
 .nav-link:hover, .nav-link.active {
   color: var(--color-text-primary);
 }
@@ -357,7 +386,7 @@ body:has(button:hover) .cursor-ring {
   border-radius: 8px;
   border: 1px solid var(--color-gold);
   color: var(--color-gold);
-  transition: background 0.25s, color 0.25s;
+  transition: background 0.25s, color 0.25s, transform 0.25s var(--ease-out);
   white-space: nowrap;
   letter-spacing: 0.03em;
 }
@@ -365,6 +394,27 @@ body:has(button:hover) .cursor-ring {
 .nav-cta:hover {
   background: var(--color-gold);
   color: var(--color-bg);
+  transform: translateY(-2px);
+}
+
+.nav-cta:active, .mob-cta:active {
+  transform: scale(0.98);
+}
+
+/* ════════════════════════════════════════════
+   SCROLL PROGRESS
+════════════════════════════════════════════ */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-bronze), var(--color-gold), var(--color-gold-light));
+  z-index: 1002;
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
 }
 
 .hamburger {
@@ -553,6 +603,11 @@ body:has(button:hover) .cursor-ring {
   transform: translateY(-2px);
 }
 
+/* Press feedback wins over the hover lift (presses from wherever the
+   button currently is, whether resting or already lifted on hover). */
+.btn:active { transform: scale(0.98); }
+.btn-primary:active, .btn-ghost:active { transform: translateY(-2px) scale(0.98); }
+
 /* ════════════════════════════════════════════
    TAGS / PILLS
 ════════════════════════════════════════════ */
@@ -573,16 +628,18 @@ body:has(button:hover) .cursor-ring {
 ════════════════════════════════════════════ */
 .reveal-up, .reveal-left, .reveal-right {
   opacity: 0;
-  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+  filter: blur(4px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out), filter 0.6s var(--ease-out);
   transition-delay: var(--d, 0ms);
 }
 
-.reveal-up { transform: translateY(50px); }
-.reveal-left { transform: translateX(-50px); }
-.reveal-right { transform: translateX(50px); }
+.reveal-up { transform: translateY(25px); }
+.reveal-left { transform: translateX(-25px); }
+.reveal-right { transform: translateX(25px); }
 
 .reveal-up.visible, .reveal-left.visible, .reveal-right.visible {
   opacity: 1;
+  filter: blur(0);
   transform: translate(0);
 }
 
@@ -674,6 +731,17 @@ body:has(button:hover) .cursor-ring {
 .hero-headline .accent-text {
   display: block;
   color: var(--color-gold);
+  background: linear-gradient(100deg, var(--color-gold) 0%, var(--color-gold-light) 30%, var(--color-gold-highlight) 50%, var(--color-gold-light) 70%, var(--color-gold) 100%);
+  background-size: 220% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: heroAccentShimmer 9s ease-in-out infinite;
+}
+
+@keyframes heroAccentShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 .hero-desc {
@@ -980,7 +1048,10 @@ body:has(button:hover) .cursor-ring {
   font-weight: 700;
   color: var(--color-text-dim);
   line-height: 1;
+  transition: color var(--duration-base) var(--ease);
 }
+
+.exp-item:hover .exp-index { color: var(--color-gold); }
 
 .exp-body { min-width: 0; }
 
@@ -2463,24 +2534,11 @@ body:has(button:hover) .cursor-ring {
 
 /* ════════════════════════════════════════════
    CONTACT — MOTION & PREMIUM EFFECTS
-   Tunes the site's existing reveal-up/left/right utility for this
-   section only (shorter distance, slightly faster) rather than adding
-   a new animation system. Everything here inherits reduced-motion
-   compliance for free from the global `prefers-reduced-motion` rule
-   near the top of this file.
+   Uses the site's global reveal-up/left/right utility as-is (no
+   section-specific override needed). Everything here inherits
+   reduced-motion compliance for free from the global
+   `prefers-reduced-motion` rule near the top of this file.
 ════════════════════════════════════════════ */
-
-/* Shorter, quicker entrance for Contact's own reveal-* elements only —
-   the section should feel like it materializes, not drift in. */
-#contact .reveal-up,
-#contact .reveal-left,
-#contact .reveal-right {
-  transition-duration: 0.6s;
-}
-
-#contact .reveal-up { transform: translateY(25px); }
-#contact .reveal-left { transform: translateX(-25px); }
-#contact .reveal-right { transform: translateX(25px); }
 
 /* ── Ambient background glow — slow, atmospheric, never distracting ── */
 .contact-form-glow {
@@ -2650,8 +2708,13 @@ body:has(button:hover) .cursor-ring {
 
 @media (max-width: 768px) {
   /* Mobile has no hover, and ambient motion costs more relative to a
-     phone GPU — keep the glow present but static. */
-  .contact-form-glow { animation: none; }
+     phone GPU — keep the glow present but static. The -10% bleed was
+     also wide enough to push past the viewport edge at narrow widths
+     (real horizontal overflow, not just an off-screen decorative
+     flourish), so it's tightened here rather than clipped with
+     overflow:hidden, which would also clip the card's own hover
+     lift/shadow. */
+  .contact-form-glow { animation: none; inset: 0; }
 }
 
 /* Contact responsive overrides — kept here, after the base rules above,

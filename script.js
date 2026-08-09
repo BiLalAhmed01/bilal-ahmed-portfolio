@@ -212,6 +212,180 @@ if (window.matchMedia('(hover: hover)').matches && !prefersReducedMotion) {
 }
 
 /* ──────────────────────────────────────────
+   CONTACT FORM — VALIDATION + NETLIFY FORMS SUBMIT
+   Submits via fetch to Netlify's form-handling endpoint (same mechanism
+   as a native HTML form POST to "/", just without the page redirect) so
+   delivery/email routing is Netlify's job — no API keys, no backend.
+────────────────────────────────────────── */
+const contactForm = document.getElementById('contactForm');
+
+if (contactForm) {
+  const submitBtn = document.getElementById('cfSubmit');
+  const submitLabel = submitBtn.querySelector('.form-submit-label');
+  const statusEl = document.getElementById('cfStatus');
+  const honeypot = contactForm.querySelector('input[name="bot-field"]');
+
+  const fields = {
+    name: { input: document.getElementById('cfName'), error: document.getElementById('cfNameError') },
+    email: { input: document.getElementById('cfEmail'), error: document.getElementById('cfEmailError') },
+    subject: { input: document.getElementById('cfSubject'), error: document.getElementById('cfSubjectError') },
+    message: { input: document.getElementById('cfMessage'), error: document.getElementById('cfMessageError') },
+  };
+
+  const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const validators = {
+    name: (v) => (v.trim().length ? '' : 'Please enter your name.'),
+    email: (v) => {
+      const value = v.trim();
+      if (!value) return 'Please enter your email address.';
+      return EMAIL_PATTERN.test(value) ? '' : 'Please enter a valid email address.';
+    },
+    subject: (v) => (v.trim().length ? '' : 'Please enter a subject.'),
+    message: (v) => (v.trim().length ? '' : 'Please tell me a little about your project.'),
+  };
+
+  let isSubmitting = false;
+
+  function setFieldError(key, message) {
+    const { input, error } = fields[key];
+    input.classList.toggle('is-invalid', !!message);
+    input.setAttribute('aria-invalid', message ? 'true' : 'false');
+    error.textContent = message;
+    error.classList.toggle('is-visible', !!message);
+  }
+
+  function validateField(key) {
+    const message = validators[key](fields[key].input.value);
+    setFieldError(key, message);
+    return !message;
+  }
+
+  Object.keys(fields).forEach((key) => {
+    fields[key].input.addEventListener('blur', () => validateField(key));
+  });
+
+  function validateAll() {
+    let allValid = true;
+    let firstInvalid = null;
+    Object.keys(fields).forEach((key) => {
+      const valid = validateField(key);
+      if (!valid && !firstInvalid) firstInvalid = fields[key].input;
+      allValid = allValid && valid;
+    });
+    if (firstInvalid) firstInvalid.focus();
+    return allValid;
+  }
+
+  function showSuccessStatus(message) {
+    statusEl.textContent = message;
+    statusEl.hidden = false;
+    statusEl.className = 'form-status is-success';
+  }
+
+  function showErrorStatus() {
+    statusEl.textContent = '';
+    const link = document.createElement('a');
+    link.href = 'mailto:ch.bilal.ahmed595@gmail.com';
+    link.textContent = 'ch.bilal.ahmed595@gmail.com';
+    statusEl.append('Something went wrong while sending your message. Please try again or email me directly at ', link, '.');
+    statusEl.hidden = false;
+    statusEl.className = 'form-status is-error';
+  }
+
+  function clearStatus() {
+    statusEl.textContent = '';
+    statusEl.hidden = true;
+    statusEl.className = 'form-status';
+  }
+
+  function triggerShake() {
+    contactForm.classList.remove('is-shaking');
+    // Force reflow so the animation restarts if it's already mid-shake.
+    void contactForm.offsetWidth;
+    contactForm.classList.add('is-shaking');
+    contactForm.addEventListener(
+      'animationend',
+      () => contactForm.classList.remove('is-shaking'),
+      { once: true }
+    );
+  }
+
+  function setSubmitState(state) {
+    contactForm.classList.remove('is-success', 'is-error');
+    submitBtn.classList.remove('is-loading', 'is-success');
+    switch (state) {
+      case 'loading':
+        submitBtn.disabled = true;
+        submitBtn.classList.add('is-loading');
+        submitLabel.textContent = 'Sending';
+        break;
+      case 'success':
+        // Stays disabled until the revert timeout below — the form was just
+        // reset, so an immediate re-click would submit an empty form.
+        submitBtn.disabled = true;
+        submitBtn.classList.add('is-success');
+        submitLabel.textContent = 'Message Sent';
+        contactForm.classList.add('is-success');
+        break;
+      case 'error':
+        submitBtn.disabled = false;
+        submitLabel.textContent = 'Try Again →';
+        contactForm.classList.add('is-error');
+        triggerShake();
+        break;
+      default:
+        submitBtn.disabled = false;
+        submitLabel.textContent = 'Send Message';
+    }
+  }
+
+  function encodeFormData(form) {
+    return Array.from(new FormData(form))
+      .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+      .join('&');
+  }
+
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (isSubmitting) return;
+
+    // Honeypot: a filled hidden field means a bot filled every input on the
+    // page. Reject silently — no error shown, no request sent.
+    if (honeypot && honeypot.value) return;
+
+    if (!validateAll()) {
+      triggerShake();
+      return;
+    }
+
+    isSubmitting = true;
+    setSubmitState('loading');
+    clearStatus();
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encodeFormData(contactForm),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Form submission failed');
+        setSubmitState('success');
+        showSuccessStatus("Thanks for reaching out. I'll get back to you as soon as possible.");
+        contactForm.reset();
+        setTimeout(() => setSubmitState('default'), 5000);
+      })
+      .catch(() => {
+        setSubmitState('error');
+        showErrorStatus();
+      })
+      .finally(() => {
+        isSubmitting = false;
+      });
+  });
+}
+
+/* ──────────────────────────────────────────
    INIT — ENSURE NAV IS CORRECT ON LOAD
 ────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {

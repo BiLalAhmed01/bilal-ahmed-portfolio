@@ -1,18 +1,8 @@
 /**
  * Centralized project data — single source of truth for the Projects system.
- *
- * Replaced 2026-08-09: the original six portfolio/coursework projects were
- * swapped for six live client websites at the user's request. Every field
- * below is sourced from the live site (fetched content + page-source tech
- * fingerprint) or the screenshot supplied in images/ — nothing invented.
- *
- * Status: data architecture only. Not yet wired into index.html's rendering
- * (the Projects section cards are still static HTML) — index.html was
- * updated in parallel with the same six projects so the live site and this
- * data file agree, but Phase 4 still owns turning this into a real
- * data-driven UI (grid, filtering, FeaturedProject, etc).
- *
- * Categories in use: "Web" (all six are WordPress/Elementor builds).
+ * Consumed by projects-ui.js, which renders the filter bar and grid entirely
+ * from PROJECTS/PROJECT_CATEGORIES below — no project content is hardcoded
+ * in the UI layer.
  */
 
 export const PROJECTS = [
@@ -324,19 +314,6 @@ export const PROJECT_CATEGORIES = [
     return ai - bi;
   }),
 ];
-
-export function getProjectBySlug(slug) {
-  return PROJECTS.find((p) => p.slug === slug) || null;
-}
-
-export function getFeaturedProjects() {
-  return PROJECTS.filter((p) => p.featured).sort((a, b) => a.priority - b.priority);
-}
-
-export function getProjectsByCategory(category) {
-  if (!category || category === "All") return PROJECTS.slice().sort((a, b) => a.priority - b.priority);
-  return PROJECTS.filter((p) => p.categories.includes(category)).sort((a, b) => a.priority - b.priority);
-}
 
 /**
  * REMOVED PROJECTS (2026-08-09): FitFlow, Speech Emotion Recognition,

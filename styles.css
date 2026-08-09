@@ -1584,8 +1584,6 @@ body:has(button:hover) .cursor-ring {
 
   .exp-head { flex-wrap: wrap; }
 
-  .expertise-grid { grid-template-columns: 1fr 1fr; }
-
   .contact-editorial { grid-template-columns: 1fr; gap: var(--space-10); }
 
   .edu-items { grid-template-columns: 1fr 1fr; }
@@ -1616,8 +1614,6 @@ body:has(button:hover) .cursor-ring {
 
   .exp-item { grid-template-columns: 1fr; gap: var(--space-4); }
   .exp-index { font-size: 1.25rem; }
-
-  .expertise-grid { grid-template-columns: 1fr; }
 
   .contact-editorial { grid-template-columns: 1fr; gap: var(--space-8); }
   .contact-ctas { flex-direction: column; align-items: stretch; }
@@ -2080,50 +2076,125 @@ body:has(button:hover) .cursor-ring {
 }
 
 /* ════════════════════════════════════════════
-   SKILLS / EXPERTISE — TYPOGRAPHIC GROUPS
+   SKILLS — GLASS TILE GRID
+   Every .skill-card shares identical dimensions;
+   glass effect reuses .glass-card's existing
+   surface/border/blur/hover tokens.
 ════════════════════════════════════════════ */
-.expertise-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-10) var(--space-8);
+.section-lead {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  max-width: 56ch;
+  line-height: 1.7;
+  margin-top: var(--space-3);
 }
 
-.expertise-group {
-  padding-top: var(--space-4);
-  border-top: 1px solid var(--color-border);
+.skills-categories {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
 }
 
-.expertise-title {
-  font-size: var(--text-label);
+.skill-category-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding-bottom: var(--space-3);
+  margin-bottom: var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.skill-cat-num {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  letter-spacing: 0.04em;
+}
+
+.skill-cat-title {
+  font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: var(--ls-label);
   text-transform: uppercase;
-  color: var(--color-gold);
-  margin-bottom: var(--space-4);
+  color: var(--color-text-primary);
 }
 
-.expertise-items {
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.skill-card {
+  min-width: 0;
+  height: 112px;
+  border-radius: var(--radius-md);
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2) 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  text-align: center;
 }
 
-.expertise-items span {
-  font-size: 0.95rem;
-  color: var(--color-text-secondary);
-  padding: var(--space-1) var(--space-3) var(--space-1) 0;
-  margin-right: var(--space-2);
-  border-right: 1px solid var(--color-border);
-  transition: color var(--duration-fast) var(--ease);
-  cursor: default;
+.skill-card:hover {
+  transform: translateY(-3px);
 }
 
-.expertise-items span:last-child {
-  border-right: none;
+.skill-icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--gold-rgb), 0.08);
+  border: 1px solid var(--color-border);
+  color: var(--color-gold);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  transition: background var(--duration-base) var(--ease), border-color var(--duration-base) var(--ease), color var(--duration-base) var(--ease);
 }
 
-.expertise-items span:hover {
+.skill-card:hover .skill-icon {
+  border-color: var(--color-border-gold);
   color: var(--color-gold-light);
+  background: rgba(var(--gold-rgb), 0.14);
+}
+
+.skill-name {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color var(--duration-fast) var(--ease);
+}
+
+.skill-card:hover .skill-name {
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 1024px) {
+  .skill-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 768px) {
+  .skill-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+  .skill-card { height: 100px; }
+  .skill-icon { width: 30px; height: 30px; font-size: 0.7rem; }
+  .skill-name { font-size: 0.8rem; }
+}
+
+@media (max-width: 480px) {
+  .skill-card { height: 92px; padding: var(--space-2); }
 }
 
 /* ════════════════════════════════════════════

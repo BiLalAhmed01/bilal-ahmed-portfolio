@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chaudary Bilal Ahmed — Web Developer & AI Automation Specialist</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <meta name="description" content="Web Developer and AI Automation Specialist building intelligent web solutions, AI-powered applications, automation workflows, and business automation systems." />
+  <meta name="keywords" content="Web Developer, AI Automation Specialist, AI Engineer, Full Stack Developer, AI Agent Developer, Workflow Automation, AI Integration, Python, TensorFlow, WordPress, WooCommerce" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════ AMBIENT BACKGROUND ═══════════════════════════════ -->
+  <div class="ambient-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-overlay"></div>
+    <div class="noise-overlay"></div>
+  </div>
+
+  <!-- ═══════════════════════════════ CURSOR ═══════════════════════════════ -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo">
+        <span class="logo-bracket">[</span>BA<span class="logo-bracket">]</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
+        <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+        <li><a href="#experience" class="nav-link" data-section="experience">Experience</a></li>
+        <li><a href="#education" class="nav-link" data-section="education">Education</a></li>
+        <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
+        <li><a href="#services" class="nav-link" data-section="services">Services</a></li>
+        <li><a href="#what-i-build" class="nav-link" data-section="what-i-build">What I Build</a></li>
+        <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
+        <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">Hire Me</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu — outside nav so it covers the full viewport independently -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#home" class="mob-link">Home</a></li>
+      <li><a href="#about" class="mob-link">About</a></li>
+      <li><a href="#experience" class="mob-link">Experience</a></li>
+      <li><a href="#education" class="mob-link">Education</a></li>
+      <li><a href="#projects" class="mob-link">Projects</a></li>
+      <li><a href="#services" class="mob-link">Services</a></li>
+      <li><a href="#what-i-build" class="mob-link">What I Build</a></li>
+      <li><a href="#skills" class="mob-link">Skills</a></li>
+      <li><a href="#contact" class="mob-link">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+  <section class="section hero" id="home">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge reveal-up" style="--d:0ms">
+          <span class="badge-dot"></span>
+          Available for opportunities
+        </div>
+        <h1 class="hero-name reveal-up" style="--d:150ms">
+          <span class="name-line">Bilal</span>
+          <span class="name-line accent-text">Ahmed</span>
+        </h1>
+        <div class="hero-role reveal-up" style="--d:300ms">
+          <span class="role-prefix">—</span>
+          <span class="typewriter" id="typewriter"></span>
+          <span class="cursor-blink">|</span>
+        </div>
+        <p class="hero-desc reveal-up" style="--d:450ms">
+          I develop scalable websites, AI-powered applications, automation workflows, and intelligent systems that improve productivity and business operations.
+        </p>
+        <div class="hero-actions reveal-up" style="--d:600ms">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#services" class="btn btn-ghost">Explore AI Solutions</a>
+          <a href="#contact" class="btn btn-ghost">Contact Me</a>
+        </div>
+        <div class="hero-socials reveal-up" style="--d:750ms">
+          <a href="https://www.linkedin.com/in/190104-bilalahmed/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://github.com/BiLalAhmed01" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          </a>
+          <a href="mailto:ch.bilal.ahmed595@gmail.com" class="social-link" aria-label="Email contact">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+          </a>
+        </div>
+      </div>
+      <!-- PROFILE PHOTO — place your photo at assets/profile.jpg -->
+      <div class="hero-photo reveal-right" style="--d:300ms">
+        <div class="hero-photo-frame">
+          <img
+            src="assets/profile.jpg"
+            alt="Chaudary Bilal Ahmed"
+            class="hero-photo-img"
+            onerror="this.parentElement.classList.add('no-photo')"
+          />
+          <div class="photo-glow"></div>
+          <div class="photo-border-ring"></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>scroll</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ ABOUT ═══════════════════════════════ -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">01 / About</span>
+        <h2 class="section-title">Who I Am</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text reveal-left">
+          <p class="about-lead">
+            Web Developer and AI Automation Specialist passionate about building intelligent digital products that solve real-world problems — from scalable web applications to AI-powered automation systems.
+          </p>
+          <p class="about-body">
+            I specialize in <strong>full-stack web development</strong>, <strong>AI integration</strong>, and <strong>workflow automation</strong>. My expertise spans building responsive websites, developing AI agents, implementing LLM-powered applications, and creating business automation solutions that drive efficiency and productivity.
+          </p>
+          <p class="about-body">
+            Whether it's developing AI-powered SaaS tools, integrating workflow automation, or building custom web applications, I focus on creating solutions that leverage the latest AI technologies to deliver measurable business value.
+          </p>
+          <div class="about-details">
+            <div class="detail-item">
+              <span class="detail-label">Location</span>
+              <span class="detail-value">Islamabad, Pakistan</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Email</span>
+              <span class="detail-value">ch.bilal.ahmed595@gmail.com</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Phone</span>
+              <span class="detail-value">+92 334 7066654</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-stats reveal-right">
+          <div class="stat-card glass-card">
+            <div class="stat-number" data-target="3">0</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-card glass-card">
+            <div class="stat-number" data-target="2">0</div>
+            <div class="stat-label">Industry Years</div>
+          </div>
+          <div class="stat-card glass-card">
+            <div class="stat-number" data-target="6">0</div> <!-- Set to 6 to match the 6 projects listed below -->
+            <div class="stat-label">Major Projects</div>
+          </div>
+          <div class="stat-card glass-card">
+            <div class="stat-number" data-target="10">0</div>
+            <div class="stat-label">Technologies</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ EXPERIENCE ═══════════════════════════════ -->
+  <section class="section" id="experience">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">02 / Experience</span>
+        <h2 class="section-title">Where I've Worked</h2>
+      </div>
+      <div class="timeline">
+
+        <div class="timeline-item reveal-left">
+          <div class="timeline-marker">
+            <div class="marker-dot"></div>
+            <div class="marker-line"></div>
+          </div>
+          <div class="timeline-card glass-card">
+            <div class="tc-header">
+              <div>
+                <h3 class="tc-role">Quality Assurance Supervisor</h3>
+                <span class="tc-company">PTCL</span>
+              </div>
+              <div class="tc-meta">
+                <span class="tc-date">Jan 2026 — Present</span>
+                <span class="tc-type onsite">Onsite</span>
+              </div>
+            </div>
+            <ul class="tc-bullets">
+              <li>Conducted site surveys and inspections for FTTH (Fiber to the Home) network deployments, ensuring full compliance with installation guidelines and quality standards.</li>
+              <li>Performed detailed audits of FTTH, OLT (Optical Line Terminal), and MSAG systems to evaluate network performance and service reliability.</li>
+              <li>Monitored and analyzed fault tickets (FTS), FLT, and NMS data, proactively identifying and resolving network issues.</li>
+              <li>Supervised fiber optic cable installation, splicing, and routing, minimizing signal loss and ensuring optimal network performance.</li>
+              <li>Prepared QA documentation and audit reports, enhancing process transparency and operational accountability.</li>
+            </ul>
+            <div class="tc-tags">
+              <span class="tag">FTTH</span><span class="tag">OLT</span><span class="tag">MSAG</span><span class="tag">Fiber Optic</span><span class="tag">QA</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal-right">
+          <div class="timeline-marker">
+            <div class="marker-dot"></div>
+            <div class="marker-line"></div>
+          </div>
+          <div class="timeline-card glass-card">
+            <div class="tc-header">
+              <div>
+                <h3 class="tc-role">Software Developer </h3>
+                <span class="tc-company">NESCOM</span>
+              </div>
+              <div class="tc-meta">
+                <span class="tc-date">Nov 2024 – Nov 2025</span>
+                <span class="tc-type hybrid">Hybrid</span>
+              </div>
+            </div>
+            <ul class="tc-bullets">
+              <li>Built a digital channelized model for multi-signal detection in the 1–2 GHz band.</li>
+              <li>Improved detection speed and system reliability under noisy conditions.</li>
+              <li>Advanced defense applications by enhancing EW monitoring and decision-making.</li>
+              <li>Integrated energy detection mechanisms to identify weak signals in low-SNR conditions, significantly improving receiver sensitivity for wideband spectrum monitoring.</li>
+              <li>Leveraged Fast Fourier Transform (FFT) analysis to provide real-time frequency-domain insights, complementing DIFM-based architectures for high-resolution frequency estimation.</li>
+              <li>Developed scalable processing frameworks using digital channelization to enable efficient multi-channel signal handling in dynamic wideband environments.</li>
+              <li>Optimized hybrid signal processing receiver frameworks to achieve a balance between high-speed detection and power efficiency for resource-constrained applications.</li>
+            </ul>
+            <div class="tc-tags">
+              <span class="tag">MATLAB</span><span class="tag">Python</span><span class="tag">GUI</span><span class="tag">Electronic Warfare</span><span class="tag">Signal Processing</span><span class="tag">DIFM Algorithm</span><span class="tag">Defense</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal-left">
+          <div class="timeline-marker">
+            <div class="marker-dot"></div>
+            <div class="marker-line"></div>
+          </div>
+          <div class="timeline-card glass-card">
+            <div class="tc-header">
+              <div>
+                <h3 class="tc-role">IT Lead</h3>
+                <span class="tc-company">Future Vision LTD</span>
+              </div>
+              <div class="tc-meta">
+                <span class="tc-date">May 2024 — Jan 2026</span>
+                <span class="tc-type remote">Remote</span>
+              </div>
+            </div>
+            <ul class="tc-bullets">
+              <li>Designed and developed responsive, SEO-friendly websites that increased client digital presence.</li>
+              <li>Collaborated remotely with creative and technical teams to deliver modern digital solutions on deadline.</li>
+              <li>Utilized WordPress, Elementor, HTML, CSS, and JavaScript for custom, high-performance web experiences.</li>
+            </ul>
+            <div class="tc-tags">
+              <span class="tag">WordPress</span><span class="tag">Elementor</span><span class="tag">HTML/CSS</span><span class="tag">JavaScript</span><span class="tag">SEO</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal-right">
+          <div class="timeline-marker">
+            <div class="marker-dot"></div>
+          </div>
+          <div class="timeline-card glass-card">
+            <div class="tc-header">
+              <div>
+                <h3 class="tc-role">Web & App Development Intern</h3>
+                <span class="tc-company">InfinityBits</span>
+              </div>
+              <div class="tc-meta">
+                <span class="tc-date">Jun 2023 — Aug 2023</span>
+                <span class="tc-type onsite">Onsite</span>
+              </div>
+            </div>
+            <ul class="tc-bullets">
+              <li>Developed and optimized responsive web and mobile applications using React.js and Flutter, ensuring performance and scalability.</li>
+              <li>Enhanced UI/UX using modern frameworks and best practices to improve user engagement and usability.</li>
+              <li>Customized WordPress themes and plugins, collaborated in Agile environments to deliver efficient solutions.</li>
+            </ul>
+            <div class="tc-tags">
+              <span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">TailwindCSS</span><span class="tag">Flutter</span><span class="tag">WordPress</span><span class="tag">JavaScript</span><span class="tag">Agile</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ EDUCATION ═══════════════════════════════ -->
+  <section class="section" id="education">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">03 / Education</span>
+        <h2 class="section-title">Academic Background</h2>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-item glass-card reveal-up" style="--d:0ms">
+          <div class="edu-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147L12 15l7.74-4.853a1.125 1.125 0 011.134-.018l.396.222a1.125 1.125 0 01.546 1.159l-.351 2.373a1.125 1.125 0 01-.523.858L12 20.25l-8.941-5.51a1.125 1.125 0 01-.523-.858l-.351-2.373a1.125 1.125 0 01.546-1.159l.396-.222a1.125 1.125 0 011.134.018z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5l10.5 6-10.5 6-10.5-6L12 4.5z" /></svg>
+          </div>
+          <span class="edu-year">2021 — 2025</span>
+          <h3 class="edu-degree">BS Computer Engineering</h3>
+          <p class="edu-school">UET Taxila</p>
+        </div>
+        <div class="edu-item glass-card reveal-up" style="--d:150ms">
+          <div class="edu-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18c-2.305 0-4.408.867-6 2.292m0-14.25v14.25" /></svg>
+          </div>
+          <span class="edu-year">2019 — 2021</span>
+          <h3 class="edu-degree">FSc Pre-Engineering</h3>
+          <p class="edu-school">Scienta Vision, Islamabad</p>
+        </div>
+        <div class="edu-item glass-card reveal-up" style="--d:300ms">
+          <div class="edu-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          </div>
+          <span class="edu-year">2017 — 2019</span>
+          <h3 class="edu-degree">Matriculation in Science</h3>
+          <p class="edu-school">SLS Montessori, Islamabad</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ PROJECTS ═══════════════════════════════ -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">03 / Projects</span>
+        <h2 class="section-title">What I've Built</h2>
+      </div>
+      <div class="projects-grid">
+
+        <!-- FitFlow -->
+        <div class="project-card glass-card reveal-up" style="--d:0ms">
+          <div class="project-thumb">
+            <img src="assets/project-fitflow.jpg" alt="FitFlow App" loading="lazy" onerror="this.parentElement.classList.add('thumb-missing')" />
+            <div class="thumb-overlay"></div>
+          </div>
+          <div class="project-header">
+            <div class="project-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+            </div>
+          </div>
+          <h3 class="project-title">FitFlow</h3>
+          <p class="project-desc">AI-powered fitness & diet planning mobile app with personalized recommendations.</p>
+          <div class="project-tags">
+            <span class="tag">Flutter</span><span class="tag">Gemini API</span>
+          </div>
+          <div class="project-metrics">
+            <span class="metric-badge">92% Accuracy</span>
+            <span class="metric-badge">20% Retention ↑</span>
+          </div>
+          <div class="project-duration">Nov 2024</div>
+          <a href="case-studies/fitflow.html" class="btn-case-study">View Case Study</a>
+        </div>
+
+        <!-- Hospital Management System -->
+        <div class="project-card glass-card reveal-up" style="--d:100ms">
+          <div class="project-thumb">
+            <img src="assets/project-hms.jpg" alt="Hospital Management System" loading="lazy" onerror="this.parentElement.classList.add('thumb-missing')" />
+            <div class="thumb-overlay"></div>
+          </div>
+          <div class="project-header">
+            <div class="project-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" /></svg>
+            </div>
+          </div>
+          <h3 class="project-title">Hospital Management System</h3>
+          <p class="project-desc">Full-featured HMS with patient management, appointments, and role-based authentication.</p>
+          <div class="project-tags">
+            <span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">HTML/CSS/JS</span>
+          </div>
+          <div class="project-metrics">
+            <span class="metric-badge">25% Efficiency ↑</span>
+          </div>
+          <div class="project-duration">Jan — Aug 2023</div>
+          <a href="case-studies/hospital-management.html" class="btn-case-study">View Case Study</a>
+        </div>
+
+        <!-- Speech Emotion Recognition -->
+        <div class="project-card glass-card reveal-up" style="--d:200ms">
+          <div class="project-thumb">
+            <img src="assets/project-speech-emotion.jpg" alt="Speech Emotion Recognition" loading="lazy" onerror="this.parentElement.classList.add('thumb-missing')" />
+            <div class="thumb-overlay"></div>
+          </div>
+          <div class="project-header">
+            <div class="project-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" /></svg>
+            </div>
+          </div>
+          <h3 class="project-title">Speech Emotion Recognition</h3>
+          <p class="project-desc">Deep learning system for classifying emotions from audio signals using MFCC features.</p>
+          <div class="project-tags">
+            <span class="tag">TensorFlow</span><span class="tag">Scikit-learn</span><span class="tag">DSP</span>
+          </div>
+          <div class="project-metrics">
+            <span class="metric-badge">87% Accuracy</span>
+          </div>
+          <div class="project-duration">2023</div>
+          <a href="case-studies/speech-emotion.html" class="btn-case-study">View Case Study</a>
+        </div>
+
+        <!-- Fooocus AI Image Generation -->
+        <div class="project-card glass-card reveal-up" style="--d:300ms">
+          <div class="project-thumb">
+            <img src="assets/project-fooocus.jpg" alt="Fooocus AI Image Generation" loading="lazy" onerror="this.parentElement.classList.add('thumb-missing')" />
+            <div class="thumb-overlay"></div>
+          </div>
+          <div class="project-header">
+            <div class="project-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" /></svg>
+            </div>
+          </div>
+          <h3 class="project-title">Fooocus AI Image Generation</h3>
+          <p class="project-desc">Optimized AI image generation system with LoRA integration and GPU acceleration.</p>
+          <div class="project-tags">
+            <span class="tag">Python</span><span class="tag">HuggingFace</span><span class="tag">Gradio</span>
+          </div>
+          <div class="project-metrics">
+            <span class="metric-badge">Faster Rendering</span>
+          </div>
+          <div class="project-duration">2024</div>
+          <a href="case-studies/fooocus-ai.html" class="btn-case-study">View Case Study</a>
+        </div>
+
+        <!-- Marked Property Website -->
+        <div class="project-card glass-card reveal-up" style="--d:400ms">
+          <div class="project-thumb">
+            <img src="assets/project-marked-property.jpg" alt="Marked Property Website" loading="lazy" onerror="this.parentElement.classList.add('thumb-missing')" />
+            <div class="thumb-overlay"></div>
+          </div>
+          <div class="project-header">
+            <div class="project-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h12" /></svg>
+            </div>
+          </div>
+          <h3 class="project-title">Marked Property Website</h3>
+          <p class="project-desc">Professional real estate website with custom theme and SEO optimization.</p>
+          <div class="project-tags">
+            <span class="tag">WordPress</span>
+            <span class="tag">SEO</span>
+          </div>
+          <div class="project-metrics">
+            <span class="metric-badge">Custom Theme</span>
+          </div>
+          <div class="project-duration">2024</div>
+          <a href="case-studies/marked-property.html" class="btn-case-study">View Case Study</a>
+        </div>
+
+        <!-- E-Commerce Website -->
+        <div class="project-card glass-card reveal-up" style="--d:500ms">
+          <div class="project-thumb">
+            <img src="assets/project-ecommerce.jpg" alt="E-Commerce Website" loading="lazy" onerror="this.parentElement.classList.add('thumb-missing')" />
+            <div class="thumb-overlay"></div>
+          </div>
+          <div class="project-header">
+            <div class="project-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.055.435 1.12 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+            </div>
+          </div>
+          <h3 class="project-title">E-Commerce Website</h3>
+          <p class="project-desc">Full-featured online store with payment integration and performance optimization.</p>
+          <div class="project-tags">
+            <span class="tag">WooCommerce</span><span class="tag">WordPress</span><span class="tag">JavaScript</span>
+          </div>
+          <div class="project-metrics">
+            <span class="metric-badge">40% Traffic ↑</span>
+            <span class="metric-badge">15% Conversion ↑</span>
+          </div>
+          <div class="project-duration">2024</div>
+          <a href="case-studies/ecommerce.html" class="btn-case-study">View Case Study</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ SERVICES ═══════════════════════════════ -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">04 / Services</span>
+        <h2 class="section-title">What I Offer</h2>
+      </div>
+      <div class="services-grid">
+
+        <!-- AI Automation Solutions -->
+        <div class="service-card glass-card reveal-up" style="--d:0ms">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
+          </div>
+          <h3 class="service-title">AI Automation Solutions</h3>
+          <p class="service-desc">End-to-end AI workflow automation to streamline business processes and boost productivity.</p>
+          <ul class="service-features">
+            <li>AI Workflow Automation</li>
+            <li>Business Process Automation</li>
+            <li>AI Chatbots</li>
+            <li>AI Agents</li>
+          </ul>
+        </div>
+
+        <!-- Web Development -->
+        <div class="service-card glass-card reveal-up" style="--d:100ms">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" /></svg>
+          </div>
+          <h3 class="service-title">Web Development</h3>
+          <p class="service-desc">Custom websites and web applications built with modern technologies for optimal performance.</p>
+          <ul class="service-features">
+            <li>Portfolio Websites</li>
+            <li>Business Websites</li>
+            <li>SaaS Platforms</li>
+            <li>E-commerce</li>
+          </ul>
+        </div>
+
+        <!-- AI Integrations -->
+        <div class="service-card glass-card reveal-up" style="--d:200ms">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+          </div>
+          <h3 class="service-title">AI Integrations</h3>
+          <p class="service-desc">Seamlessly integrate AI capabilities into your existing systems and applications.</p>
+          <ul class="service-features">
+            <li>LLM APIs</li>
+            <li>Custom AI Systems</li>
+            <li>Recommendation Engines</li>
+            <li>AI-Powered Features</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ WHAT I BUILD ═══════════════════════════════ -->
+  <section class="section" id="what-i-build">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">05 / What I Build</span>
+        <h2 class="section-title">My Expertise</h2>
+      </div>
+      <div class="build-grid">
+
+        <div class="build-card glass-card reveal-up" style="--d:0ms">
+          <div class="build-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25z" /></svg>
+          </div>
+          <h3 class="build-title">AI Agents</h3>
+          <p class="build-desc">Intelligent autonomous agents that perform tasks, make decisions, and interact with systems.</p>
+        </div>
+
+        <div class="build-card glass-card reveal-up" style="--d:100ms">
+          <div class="build-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+          </div>
+          <h3 class="build-title">Workflow Automation</h3>
+          <p class="build-desc">Automated workflows that connect systems, eliminate manual tasks, and optimize processes.</p>
+        </div>
+
+        <div class="build-card glass-card reveal-up" style="--d:200ms">
+          <div class="build-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" /></svg>
+          </div>
+          <h3 class="build-title">Web Applications</h3>
+          <p class="build-desc">Scalable, responsive web applications built with modern frameworks and best practices.</p>
+        </div>
+
+        <div class="build-card glass-card reveal-up" style="--d:300ms">
+          <div class="build-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h12" /></svg>
+          </div>
+          <h3 class="build-title">SaaS Platforms</h3>
+          <p class="build-desc">Software-as-a-Service solutions with subscription models, user management, and scalable architecture.</p>
+        </div>
+
+        <div class="build-card glass-card reveal-up" style="--d:400ms">
+          <div class="build-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          </div>
+          <h3 class="build-title">Business Automation</h3>
+          <p class="build-desc">End-to-end business process automation to reduce costs, improve efficiency, and scale operations.</p>
+        </div>
+
+        <div class="build-card glass-card reveal-up" style="--d:500ms">
+          <div class="build-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.055.435 1.12 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+          </div>
+          <h3 class="build-title">AI Integrations</h3>
+          <p class="build-desc">Custom AI integrations using LLMs, APIs, and machine learning models to enhance applications.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ SKILLS ═══════════════════════════════ -->
+  <section class="section" id="skills">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">06 / Skills</span>
+        <h2 class="section-title">What I Know</h2>
+      </div>
+      <div class="skills-grid">
+
+        <div class="skills-group glass-card reveal-up" style="--d:0ms">
+          <div class="sg-header">
+            <div class="sg-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" /></svg>
+            </div>
+            <h3 class="sg-title">Web Development</h3>
+          </div>
+          <div class="skills-pills">
+            <span class="pill">HTML</span>
+            <span class="pill">CSS</span>
+            <span class="pill">JavaScript</span>
+            <span class="pill">TailwindCSS</span>
+            <span class="pill">PHP</span>
+            <span class="pill">MySQL</span>
+            <span class="pill">WordPress</span>
+            <span class="pill">Flutter</span>
+            <span class="pill">REST APIs</span>
+            <span class="pill">React.js</span>
+            <span class="pill">Node.js</span>
+          </div>
+        </div>
+
+        <div class="skills-group glass-card reveal-up" style="--d:150ms">
+          <div class="sg-header">
+            <div class="sg-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" /></svg>
+            </div>
+            <h3 class="sg-title">AI & Automation</h3>
+          </div>
+          <div class="skills-pills">
+            <span class="pill">Python</span>
+            <span class="pill">TensorFlow</span>
+            <span class="pill">Machine Learning</span>
+            <span class="pill">Deep Learning</span>
+            <span class="pill">LLMs</span>
+            <span class="pill">Gemini API</span>
+            <span class="pill">AI Agents</span>
+            <span class="pill">Prompt Engineering</span>
+            <span class="pill">Workflow Automation</span>
+            <span class="pill">Scikit-learn</span>
+          </div>
+        </div>
+
+        <div class="skills-group glass-card reveal-up" style="--d:300ms">
+          <div class="sg-header">
+            <div class="sg-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0H3" /></svg>
+            </div>
+            <h3 class="sg-title">Tools</h3>
+          </div>
+          <div class="skills-pills">
+            <span class="pill">Git</span>
+            <span class="pill">GitHub</span>
+            <span class="pill">VS Code</span>
+            <span class="pill">Replit</span>
+            <span class="pill">Google Colab</span>
+            <span class="pill">HuggingFace</span>
+            <span class="pill">Figma</span>
+            <span class="pill">Elementor</span>
+            <span class="pill">WooCommerce</span>
+          </div>
+        </div>
+
+      </div>
+
+  <!-- ═══════════════════════════════ CONTACT ═══════════════════════════════ -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">07 / Contact</span>
+        <h2 class="section-title">Let's Connect</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info reveal-left">
+          <p class="contact-lead">Have an opportunity, project, or just want to talk tech? I'm always open to meaningful conversations.</p>
+          <div class="contact-items">
+            <a href="mailto:ch.bilal.ahmed595@gmail.com" class="contact-item glass-card" aria-label="Send an email to Bilal">
+              <div class="ci-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+              </div>
+              <div class="ci-content">
+                <span class="ci-label">Email</span>
+                <span class="ci-value">ch.bilal.ahmed595@gmail.com</span>
+              </div>
+            </a>
+            <a href="tel:+923347066654" class="contact-item glass-card" aria-label="Call or WhatsApp Bilal">
+              <div class="ci-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+              </div>
+              <div class="ci-content">
+                <span class="ci-label">Phone / WhatsApp</span>
+                <span class="ci-value">+92 334 7066654</span>
+              </div>
+            </a>
+            <a href="https://www.linkedin.com/in/190104-bilalahmed/" target="_blank" rel="noopener noreferrer" class="contact-item glass-card" aria-label="Visit Bilal's LinkedIn Profile">
+              <div class="ci-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </div>
+              <div class="ci-content">
+                <span class="ci-label">LinkedIn</span>
+                <span class="ci-value">linkedin.com/in/190104-bilalahmed</span>
+              </div>
+            </a>
+            <a href="https://github.com/BiLalAhmed01" target="_blank" rel="noopener noreferrer" class="contact-item glass-card" aria-label="Visit Bilal's GitHub Profile">
+              <div class="ci-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              </div>
+              <div class="ci-content">
+                <span class="ci-label">GitHub</span>
+                <span class="ci-value">github.com/BiLalAhmed01</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="contact-form-wrap reveal-right">
+          <form class="contact-form glass-card" id="contactForm">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" placeholder="John Doe" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" placeholder="john@company.com" required />
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" placeholder="Project Inquiry" />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" rows="5" placeholder="Tell me about your project or opportunity..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">
+              <span>Send Message</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-logo"><span class="logo-bracket">[</span>BA<span class="logo-bracket">]</span></span>
+        <div class="footer-socials">
+          <a href="https://www.linkedin.com/in/190104-bilalahmed/" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://github.com/BiLalAhmed01" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          </a>
+          <a href="mailto:ch.bilal.ahmed595@gmail.com" class="footer-social-link" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+          </a>
+        </div>
+        <span class="footer-copy">© 2025 Chaudary Bilal Ahmed. All rights reserved.</span>
+        <a href="#home" class="footer-top" aria-label="Back to top">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" /></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

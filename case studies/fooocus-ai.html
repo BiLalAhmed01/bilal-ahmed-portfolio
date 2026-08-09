@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Fooocus AI Image Generation System | Case Study</title>
+  <link rel="icon" type="image/png" href="../assets/favicon.png" />
+  <meta name="description" content="Detailed case study of Fooocus AI Image Generation System - an optimized AI image generation system with LoRA integration and GPU acceleration using Python, HuggingFace, and Gradio." />
+  <meta name="keywords" content="Fooocus AI, image generation, Python, HuggingFace, Gradio, LoRA, GPU optimization, AI, machine learning, case study" />
+  <meta name="author" content="Chaudary Bilal Ahmed" />
+  
+  <!-- Open Graph Tags -->
+  <meta property="og:title" content="Fooocus AI Image Generation System" />
+  <meta property="og:description" content="Optimized AI image generation system with LoRA integration and GPU acceleration for faster rendering and improved outputs." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bilalahmed.com/case-studies/fooocus-ai.html" />
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "Fooocus AI Image Generation System",
+    "description": "Optimized AI image generation system with LoRA integration and GPU acceleration",
+    "author": {
+      "@type": "Person",
+      "name": "Chaudary Bilal Ahmed"
+    },
+    "dateCreated": "2024",
+    "keywords": "Python, HuggingFace, Gradio, LoRA, AI Image Generation"
+  }
+  </script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════ AMBIENT BACKGROUND ═══════════════════════════════ -->
+  <div class="ambient-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-overlay"></div>
+    <div class="noise-overlay"></div>
+  </div>
+
+  <!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">
+        <span class="logo-bracket">[</span>BA<span class="logo-bracket">]</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html#home" class="nav-link">Home</a></li>
+        <li><a href="../index.html#projects" class="nav-link active">Projects</a></li>
+        <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════ CASE STUDY HERO ═══════════════════════════════ -->
+  <section class="cs-hero">
+    <div class="container">
+      <a href="../index.html#projects" class="cs-back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
+        Back to Projects
+      </a>
+      <div class="cs-hero-content">
+        <h1 class="cs-hero-title">Fooocus AI Image Generation</h1>
+        <p class="cs-hero-subtitle">Optimized AI image generation system with LoRA integration and GPU acceleration for faster rendering and improved output quality.</p>
+        <div class="cs-hero-meta">
+          <div class="cs-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            2024
+          </div>
+          <div class="cs-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+            AI/ML
+          </div>
+        </div>
+        <div class="cs-tech-stack">
+          <span class="cs-tech-badge">Python</span>
+          <span class="cs-tech-badge">HuggingFace</span>
+          <span class="cs-tech-badge">Gradio</span>
+          <span class="cs-tech-badge">Colab</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ PROJECT OVERVIEW ═══════════════════════════════ -->
+  <section class="section cs-section">
+    <div class="container">
+      <div class="cs-section-content">
+        <h2 class="cs-section-title">Project Overview</h2>
+        <div class="cs-content-block">
+          <p>Fooocus AI Image Generation System is an optimized implementation of state-of-the-art image generation models, enhanced with custom LoRA (Low-Rank Adaptation) integrations and GPU acceleration. The system provides faster rendering times and improved output quality through careful model configuration and optimization.</p>
+          <p>Built using Google Colab for accessible GPU computing, the system leverages HuggingFace's model hub and Gradio for an intuitive web interface, making powerful AI image generation accessible to users without extensive technical knowledge.</p>
+        </div>
+        
+        <div class="cs-metrics-grid">
+          <div class="cs-metric-card glass-card">
+            <div class="cs-metric-value">3x</div>
+            <div class="cs-metric-label">Faster Rendering</div>
+          </div>
+          <div class="cs-metric-card glass-card">
+            <div class="cs-metric-value">+</div>
+            <div class="cs-metric-label">Improved Outputs</div>
+          </div>
+          <div class="cs-metric-card glass-card">
+            <div class="cs-metric-value">GPU</div>
+            <div class="cs-metric-label">Accelerated</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ PROBLEM STATEMENT ═══════════════════════════════ -->
+  <section class="section cs-section">
+    <div class="container">
+      <div class="cs-section-content">
+        <h2 class="cs-section-title">Problem Statement</h2>
+        <div class="cs-content-block">
+          <p>Standard AI image generation systems face several limitations:</p>
+          <ul>
+            <li>Slow rendering times on standard hardware</li>
+            <li>Limited customization options for specific styles</li>
+            <li>Complex setup processes requiring technical expertise</li>
+            <li>Inconsistent output quality across different prompts</li>
+            <li>High computational costs for commercial use</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ OBJECTIVES ═══════════════════════════════ -->
+  <section class="section cs-section">
+    <div class="container">
+      <div class="cs-section-content">
+        <h2 class="cs-section-title">Objectives</h2>
+        <div class="cs-content-block">
+          <ul>
+            <li>Optimize AI image generation for faster rendering times</li>
+            <li>Integrate custom LoRA models for style customization</li>
+            <li>Create an accessible user interface with Gradio</li>
+            <li>Leverage GPU acceleration for improved performance</li>
+            <li>Implement VAE optimization for better output quality</li>
+            <li>Deploy the system in Google Colab for easy access</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ DEVELOPMENT PROCESS ═══════════════════════════════ -->
+  <section class="section cs-section">
+    <div class="container">
+      <div class="cs-section-content">
+        <h2 class="cs-section-title">Development Process</h2>
+        <div class="cs-timeline">
+          <div class="cs-timeline-item">
+            <div class="cs-timeline-phase">Phase 1: Environment Setup</div>
+            <div class="cs-timeline-tasks">
+              <span>• Google Colab notebook configuration</span>
+              <span>• Python environment setup and dependency installation</span>
+              <span>• GPU allocation and testing</span>
+              <span>• HuggingFace authentication and model access</span>
+            </div>
+          </div>
+          <div class="cs-timeline-item">
+            <div class="cs-timeline-phase">Phase 2: Model Configuration</div>
+            <div class="cs-timeline-tasks">
+              <span>• Base model selection and download</span>
+              <span>• Model parameter optimization</span>
+              <span>• VAE (Variational Autoencoder) configuration</span>
+              <span>• Custom LoRA model integration</span>
+            </div>
+          </div>
+          <div class="cs-timeline-item">
+            <div class="cs-timeline-phase">Phase 3: LoRA Integration</div>
+            <div class="cs-timeline-tasks">
+              <span>• Custom LoRA model training/selection</span>
+              <span>• LoRA weight optimization</span>
+              <span>• Style-specific model integration</span>
+              <span>• Multi-LoRA blending capabilities</span>
+            </div>
+          </div>
+          <div class="cs-timeline-item">
+            <div class="cs-timeline-phase">Phase 4: GPU Optimization</div>
+            <div class="cs-timeline-tasks">
+              <span>• Memory optimization techniques</span>
+              <span>• Batch processing configuration</span>
+              <span>• CUDA kernel optimization</span>
+              <span>• Mixed precision training implementation</span>
+            </div>
+          </div>
+          <div class="cs-timeline-item">
+            <div class="cs-timeline-phase">Phase 5: Interface & Deployment</div>
+            <div class="cs-timeline-tasks">
+              <span>• Gradio interface development</span>
+              <span>• User input optimization</span>
+              <span>• Output display and download features</span>
+              <span>• Colab deployment and sharing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ TECHNOLOGIES & ARCHITECTURE ═══════════════════════════════ -->
+  <section class="section cs-section">
+    <div class="container">
+      <div class="cs-section-content">
+        <h2 class="cs-section-title">Technologies & Architecture</h2>
+        <div class="cs-content-block">
+          <h4>Core Framework</h4>
+          <p>Python with PyTorch for deep learning model execution and optimization.</p>
+          
+          <h4>Model Hub</h4>
+          <p>HuggingFace Transformers and Diffusers for accessing state-of-the-art image generation models.</p>
+          
+          <h4>User Interface</h4>
+          <p>Gradio for creating an intuitive web-based interface for prompt input and image output display.</p>
+          
+          <h4>Computing Platform</h4>
+          <p>Google Colab with free GPU access for accessible and powerful computing resources.</p>
+          
+          <h4>Optimization Techniques</h4>
+          <p>LoRA integration for efficient fine-tuning, VAE optimization for better image quality, and GPU memory optimization for faster processing.</p>
+        </div>
+        <div class="cs-tech-stack">
+          <span class="cs-tech-badge">Python</span>
+          <span class="cs-tech-badge">PyTorch</span>
+          <span class="cs-tech-badge">HuggingFace</span>
+          <span class="cs-tech-badge">Gradio</span>
+          <span class="cs-tech-badge">Google Colab</span>
+          <span class="cs-tech-badge">LoRA</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ FEATURES IMPLEMENTED ═══════════════════════════════ -->
+  <section class="section cs-section">
+    <div class="container">
+      <div class="cs-section-content">
+        <h2 class="cs-section-title">Features Implemented</h2>
+        <div class="cs-content-block">
+          <ul>
+            <li><strong>Optimized Rendering:</strong> 3x faster image generation through GPU optimization and efficient memory management</li>
+            <li><strong>LoRA Integration:</strong> Custom style models for specific artistic directions and improved output consistency</li>
+            <li><strong>VAE Optimization:</strong> Enhanced Variational Autoencoder configuration for better image quality and detail</li>
+            <li><strong>Gradio Interface:</strong> User-friendly web interface for easy prompt input and image generation</li>
+            <li><strong>GPU Acceleration:</strong> Full utilization of Colab's GPU resources for maximum performance</li>
+            <li><strong>Batch Processing:</strong> Capability to generate multiple images simultaneously</li>
+            <li><strong>Custom Parameters:</strong> Adjustable settings for guidance scale, steps, and seed control</li>
+            <li><strong>Easy Deployment:</strong> One-click Colab deployment for instant access</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ CHALLENGES & SOLUTIONS ═══════════════════════════════ -->
+  <section class="section cs-section">
+    <div class="container">
+      <div class="cs-section-content">
+        <h2 class="cs-section-title">Challenges & Solutions</h2>
+        <div class="cs-challenge-grid">
+          <div class="cs-challenge-card glass-card">
+            <h5>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+              Challenge
+            </h5>
+            <p>Limited GPU memory in Colab environment restricting model size and batch processing capabilities.</p>
+          </div>
+          <div class="cs-challenge-card glass-card">
+            <h5>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              Solution
+            </h5>
+            <p>Implemented memory optimization techniques including gradient checkpointing and efficient attention mechanisms, enabling larger batch sizes within memory constraints.</p>
+          </div>
+          <div class="cs-challenge-card glass-card">
+            <h5>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+              Challenge
+            </h5>
+            <p>Achieving consistent output quality across different prompts and style combinations.</p>
+          </div>
+          <div class="cs-challenge-card glass-card">
+            <h5>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              Solution
+            </h5>
+            <p>Carefully tuned LoRA weights and VAE parameters through extensive testing, resulting in improved output consistency and quality across diverse prompts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ RESULTS & METRICS ═══════════════════════════════ -->
+  <section class="section cs-section">
+    <div class="container">
+      <div class="cs-section-content">
+        <h2 class="cs-section-title">Results & Metrics</h2>
+        <div class="cs-metrics-grid">
+          <div class="cs-metric-card glass-card">
+            <div class="cs-metric-value">3x</div>
+            <div class="cs-metric-label">Faster Rendering</div>
+          </div>
+          <div class="cs-metric-card glass-card">
+            <div class="cs-metric-value">High</div>
+            <div class="cs-metric-label">Output Quality</div>
+          </div>
+          <div class="cs-metric-card glass-card">
+            <div class="cs-metric-value">Easy</div>
+            <div class="cs-metric-label">Accessibility</div>
+          </div>
+        </div>
+        <div class="cs-content-block" style="margin-top: 32px;">
+          <p>The optimized system achieved 3x faster rendering times compared to standard implementations while maintaining or improving output quality. The Gradio interface made the system accessible to users without technical expertise, and the Colab deployment provided free GPU access for widespread use.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ SCREENSHOTS ═══════════════════════════════ -->
+  <section class="section cs-section">
+    <div class="container">
+      <div class="cs-section-content">
+        <h2 class="cs-section-title">Screenshots</h2>
+        <div class="cs-image-placeholder">
+          Generated Images Placeholder
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ LESSONS LEARNED ═══════════════════════════════ -->
+  <section class="section cs-section">
+    <div class="container">
+      <div class="cs-section-content">
+        <h2 class="cs-section-title">Lessons Learned</h2>
+        <div class="cs-content-block">
+          <ul>
+            <li>GPU memory optimization is crucial for large model deployment</li>
+            <li>LoRA models provide efficient customization without full retraining</li>
+            <li>User interface design significantly impacts adoption and usability</li>
+            <li>Cloud platforms like Colab democratize access to powerful AI tools</li>
+            <li>Parameter tuning requires systematic testing and validation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ FUTURE IMPROVEMENTS ═══════════════════════════════ -->
+  <section class="section cs-section">
+    <div class="container">
+      <div class="cs-section-content">
+        <h2 class="cs-section-title">Future Improvements</h2>
+        <div class="cs-content-block">
+          <ul>
+            <li>Integration with additional base models for diverse styles</li>
+            <li>Custom LoRA training capabilities for user-specific styles</li>
+            <li>Image-to-image generation and editing features</li>
+            <li>API deployment for integration into other applications</li>
+            <li>Mobile optimization for on-device generation</li>
+            <li>Community model sharing and marketplace</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ LINKS ═══════════════════════════════ -->
+  <section class="section cs-section">
+    <div class="container">
+      <div class="cs-section-content">
+        <h2 class="cs-section-title">Project Links</h2>
+        <div class="cs-links">
+          <a href="#" class="cs-link-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            GitHub Repository
+          </a>
+          <a href="#" class="cs-link-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+            Live Demo
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-logo"><span class="logo-bracket">[</span>BA<span class="logo-bracket">]</span></span>
+        <span class="footer-copy">© 2025 Chaudary Bilal Ahmed. All rights reserved.</span>
+        <a href="../index.html#home" class="footer-top" aria-label="Back to top">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" /></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

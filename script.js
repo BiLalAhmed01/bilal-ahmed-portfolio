@@ -90,10 +90,28 @@ function getFocusableMenuItems() {
   return Array.from(mobileMenu.querySelectorAll('a[href]'));
 }
 
+// Everything outside the menu (nav links, sections, footer) must be inert
+// while the menu is open — otherwise it's still reachable by screen-reader
+// navigation even though the Tab-key trap covers physical keyboard users.
+// The hamburger button itself is left reachable so it can still close the menu.
+function setOutsideInert(isInert) {
+  Array.from(document.body.children).forEach(el => {
+    if (el === mobileMenu || el === nav) return;
+    if (isInert) el.setAttribute('inert', '');
+    else el.removeAttribute('inert');
+  });
+  [document.getElementById('navLinks'), document.querySelector('.nav-cta')].forEach(el => {
+    if (!el) return;
+    if (isInert) el.setAttribute('inert', '');
+    else el.removeAttribute('inert');
+  });
+}
+
 function openMobileMenu() {
   lastFocusedBeforeMenu = document.activeElement;
   mobileMenu.classList.add('open');
   mobileMenu.removeAttribute('inert');
+  setOutsideInert(true);
   hamburger.classList.add('open');
   hamburger.setAttribute('aria-expanded', 'true');
   document.body.style.overflow = 'hidden';
@@ -107,6 +125,7 @@ function openMobileMenu() {
 function closeMobileMenu() {
   mobileMenu.classList.remove('open');
   mobileMenu.setAttribute('inert', '');
+  setOutsideInert(false);
   hamburger.classList.remove('open');
   hamburger.setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';

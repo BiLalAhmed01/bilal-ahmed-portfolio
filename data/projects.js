@@ -314,16 +314,3 @@ export const PROJECT_CATEGORIES = [
     return ai - bi;
   }),
 ];
-
-/**
- * REMOVED PROJECTS (2026-08-09): FitFlow, Speech Emotion Recognition,
- * Fooocus AI Image Generation, Hospital Management System, the original
- * E-Commerce Website, and the original Marked Property Website were removed
- * from the public dataset per explicit user request. Their case-study pages
- * (case-studies/fitflow.html, case-studies/speech-emotion.html,
- * case-studies/fooocus-ai.html, case-studies/hospital-management.html,
- * case-studies/ecommerce.html, case-studies/marked-property.html) were left
- * on disk but are no longer linked from index.html or this data file — ask
- * before deleting them if they're confirmed unwanted, since removal there is
- * harder to reverse than removing a reference.
- */

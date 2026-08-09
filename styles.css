@@ -2143,27 +2143,49 @@ body:has(button:hover) .cursor-ring {
   transform: translateY(-3px);
 }
 
-.skill-icon {
-  width: 34px;
-  height: 34px;
+/* Fixed glass container — identical for every tile, whether it holds a
+   real brand-logo <img> or the monogram fallback for non-product skills
+   (e.g. "Workflow Automation") that have no genuine logo to use. */
+.skill-icon-wrapper {
+  width: 42px;
+  height: 42px;
   flex-shrink: 0;
-  border-radius: 50%;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(var(--gold-rgb), 0.08);
-  border: 1px solid var(--color-border);
-  color: var(--color-gold);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background var(--duration-base) var(--ease), border-color var(--duration-base) var(--ease);
+}
+
+.skill-card:hover .skill-icon-wrapper {
+  border-color: var(--color-border-gold);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.skill-logo {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.skill-card:hover .skill-logo {
+  transform: scale(1.04);
+}
+
+/* Fallback for skills with no genuine standalone brand logo */
+.skill-icon-mono {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.75rem;
-  transition: background var(--duration-base) var(--ease), border-color var(--duration-base) var(--ease), color var(--duration-base) var(--ease);
+  color: var(--color-gold);
+  transition: color var(--duration-base) var(--ease);
 }
 
-.skill-card:hover .skill-icon {
-  border-color: var(--color-border-gold);
+.skill-card:hover .skill-icon-mono {
   color: var(--color-gold-light);
-  background: rgba(var(--gold-rgb), 0.14);
 }
 
 .skill-name {
@@ -2189,7 +2211,9 @@ body:has(button:hover) .cursor-ring {
 @media (max-width: 768px) {
   .skill-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
   .skill-card { height: 100px; }
-  .skill-icon { width: 30px; height: 30px; font-size: 0.7rem; }
+  .skill-icon-wrapper { width: 36px; height: 36px; }
+  .skill-logo { width: 20px; height: 20px; }
+  .skill-icon-mono { font-size: 0.7rem; }
   .skill-name { font-size: 0.8rem; }
 }
 

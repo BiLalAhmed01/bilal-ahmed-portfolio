@@ -75,6 +75,7 @@
         <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
         <li><a href="#services" class="nav-link" data-section="services">Services</a></li>
         <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
+        <li><a href="#certifications" class="nav-link" data-section="certifications">Certifications</a></li>
         <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
       </ul>
       <a href="#contact" class="nav-cta">Let's Talk</a>
@@ -92,6 +93,7 @@
       <li><a href="#projects" class="mob-link" data-section="projects">Projects</a></li>
       <li><a href="#services" class="mob-link" data-section="services">Services</a></li>
       <li><a href="#skills" class="mob-link" data-section="skills">Skills</a></li>
+      <li><a href="#certifications" class="mob-link" data-section="certifications">Certifications</a></li>
       <li><a href="#contact" class="mob-link" data-section="contact">Contact</a></li>
     </ul>
     <a href="#contact" class="mob-cta">Let's Talk</a>
@@ -504,11 +506,45 @@
     </div>
   </section>
 
+  <!-- ═══════════════════════════════ CERTIFICATIONS ═══════════════════════════════ -->
+  <section class="section" id="certifications">
+    <div class="cert-section-glow" aria-hidden="true"></div>
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">07 / Certifications</span>
+        <h2 class="section-title">Certifications</h2>
+        <p class="section-lead">Professional learning and certifications across AI, automation and emerging technologies.</p>
+      </div>
+
+      <div class="cert-grid" id="certGrid"></div>
+    </div>
+  </section>
+
+  <!-- Certificate preview modal — single reusable instance, populated by certifications-ui.js -->
+  <div class="cert-modal" id="certModal" role="dialog" aria-modal="true" aria-labelledby="certModalTitle" inert>
+    <div class="cert-modal-backdrop" data-cert-close></div>
+    <div class="cert-modal-panel">
+      <div class="cert-modal-head">
+        <span class="cert-modal-title" id="certModalTitle"></span>
+        <button type="button" class="cert-modal-close" id="certModalClose" aria-label="Close certificate preview">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+      <div class="cert-modal-body">
+        <iframe id="certModalFrame" title="Certificate preview" src="about:blank"></iframe>
+      </div>
+      <div class="cert-modal-actions">
+        <a id="certModalOpen" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Open PDF</a>
+        <a id="certModalDownload" href="#" class="btn btn-primary">Download PDF</a>
+      </div>
+    </div>
+  </div>
+
   <!-- ═══════════════════════════════ CONTACT ═══════════════════════════════ -->
   <section class="section" id="contact">
     <div class="container">
       <div class="section-header reveal-up" style="--d:0ms">
-        <span class="section-tag">07 / Get In Touch</span>
+        <span class="section-tag">08 / Get In Touch</span>
       </div>
       <div class="contact-editorial">
         <div class="contact-statement">
@@ -628,5 +664,6 @@
 
   <script src="script.js"></script>
   <script type="module" src="projects-ui.js"></script>
+  <script type="module" src="certifications-ui.js"></script>
 </body>
 </html>

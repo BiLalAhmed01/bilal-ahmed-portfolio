@@ -122,9 +122,14 @@ function getFocusableMenuItems() {
 // while the menu is open — otherwise it's still reachable by screen-reader
 // navigation even though the Tab-key trap covers physical keyboard users.
 // The hamburger button itself is left reachable so it can still close the menu.
+// The certificate modal manages its own inert state independently (it may
+// be open — e.g. opened, then the mobile menu somehow triggered — or
+// simply closed already) and is skipped entirely here rather than having
+// this function blindly remove its `inert` on restore.
 function setOutsideInert(isInert) {
+  const certModal = document.getElementById('certModal');
   Array.from(document.body.children).forEach(el => {
-    if (el === mobileMenu || el === nav) return;
+    if (el === mobileMenu || el === nav || el === certModal) return;
     if (isInert) el.setAttribute('inert', '');
     else el.removeAttribute('inert');
   });

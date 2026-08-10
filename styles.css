@@ -1112,6 +1112,7 @@ body:has(button:hover) .cursor-ring {
 
 .tc-type.onsite { background: rgba(34,197,94,0.1); color: #22c55e; border: 1px solid rgba(34,197,94,0.2); }
 .tc-type.remote { background: rgba(var(--gold-rgb), 0.1); color: var(--color-gold-light); border: 1px solid rgba(var(--gold-rgb), 0.2); }
+.tc-type.hybrid { background: rgba(96,165,250,0.1); color: #60a5fa; border: 1px solid rgba(96,165,250,0.2); }
 
 .exp-bullets {
   list-style: none;

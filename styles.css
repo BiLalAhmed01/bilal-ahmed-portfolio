@@ -455,6 +455,8 @@ body:has(button:hover) .cursor-ring {
   align-items: center;
   justify-content: center;
   gap: var(--space-10);
+  padding: var(--space-10) var(--gutter-mobile);
+  overflow-y: auto;
   opacity: 0;
   transform: translateY(-8px);
   pointer-events: none;
@@ -1654,6 +1656,8 @@ body:has(button:hover) .cursor-ring {
 
   .exp-head { flex-wrap: wrap; }
 
+  .edu-grid { grid-template-columns: repeat(2, 1fr); }
+
   .sw-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-6); }
 }
 
@@ -1680,6 +1684,9 @@ body:has(button:hover) .cursor-ring {
 
   .exp-item { grid-template-columns: 1fr; gap: var(--space-4); }
   .exp-index { font-size: 1.25rem; }
+
+  .edu-grid { grid-template-columns: 1fr; gap: var(--space-4); }
+  .edu-item { padding: var(--space-6); }
 
   .footer-inner { flex-direction: column; text-align: center; gap: 24px; }
   .footer-brand { flex-direction: column; }

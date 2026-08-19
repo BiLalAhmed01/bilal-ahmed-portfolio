@@ -51,22 +51,32 @@ if (filterbarEl && gridEl) {
     return extra ? `${project.category} — ${extra}` : project.category;
   }
 
+  const chromeBar = `
+      <div class="sw-thumb-chrome" aria-hidden="true">
+        <span class="sw-chrome-dot"></span>
+        <span class="sw-chrome-dot"></span>
+        <span class="sw-chrome-dot"></span>
+      </div>`;
+
   function imageBlock(project, { eager = false } = {}) {
     const alt = escapeHtml(`${project.title} — website preview`);
     if (!project.image) {
-      return `<div class="sw-thumb sw-thumb--missing"><span>PROJECT VISUAL NEEDED</span></div>`;
+      return `<div class="sw-thumb sw-thumb--missing">${chromeBar}<span>PROJECT VISUAL NEEDED</span></div>`;
     }
     return `
       <div class="sw-thumb">
-        <img
-          src="${escapeHtml(project.image)}"
-          alt="${alt}"
-          width="1200" height="750"
-          loading="${eager ? "eager" : "lazy"}"
-          decoding="async"
-          ${eager ? 'fetchpriority="high"' : ""}
-          onerror="this.closest('.sw-thumb').classList.add('sw-thumb--missing'); this.remove();"
-        />
+        ${chromeBar}
+        <div class="sw-thumb-img">
+          <img
+            src="${escapeHtml(project.image)}"
+            alt="${alt}"
+            width="1200" height="750"
+            loading="${eager ? "eager" : "lazy"}"
+            decoding="async"
+            ${eager ? 'fetchpriority="high"' : ""}
+            onerror="this.closest('.sw-thumb').classList.add('sw-thumb--missing'); this.remove();"
+          />
+        </div>
       </div>`;
   }
 

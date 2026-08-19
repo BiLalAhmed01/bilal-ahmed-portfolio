@@ -1,0 +1,201 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --font-heading: var(--font-sans);
+    --font-sans: 'Geist Variable', sans-serif;
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+    /* Portfolio brand tokens — matches the static site's gold/dark palette */
+    --background: oklch(0.145 0.004 60);
+    --foreground: oklch(0.97 0.01 90);
+    --card: oklch(0.19 0.006 60);
+    --card-foreground: oklch(0.97 0.01 90);
+    --popover: oklch(0.19 0.006 60);
+    --popover-foreground: oklch(0.97 0.01 90);
+    --primary: oklch(0.72 0.1 80);
+    --primary-foreground: oklch(0.145 0.01 60);
+    --secondary: oklch(0.24 0.006 60);
+    --secondary-foreground: oklch(0.97 0.01 90);
+    --muted: oklch(0.24 0.006 60);
+    --muted-foreground: oklch(0.65 0.015 80);
+    --accent: oklch(0.72 0.1 80);
+    --accent-foreground: oklch(0.145 0.01 60);
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: oklch(0.72 0.1 80 / 16%);
+    --input: oklch(0.72 0.1 80 / 16%);
+    --ring: oklch(0.72 0.1 80 / 55%);
+    --chart-1: oklch(0.72 0.1 80);
+    --chart-2: oklch(0.6 0.08 80);
+    --chart-3: oklch(0.48 0.06 80);
+    --chart-4: oklch(0.36 0.04 80);
+    --chart-5: oklch(0.24 0.02 80);
+    --radius: 0.75rem;
+    --sidebar: oklch(0.145 0.004 60);
+    --sidebar-foreground: oklch(0.97 0.01 90);
+    --sidebar-primary: oklch(0.72 0.1 80);
+    --sidebar-primary-foreground: oklch(0.145 0.01 60);
+    --sidebar-accent: oklch(0.24 0.006 60);
+    --sidebar-accent-foreground: oklch(0.97 0.01 90);
+    --sidebar-border: oklch(0.72 0.1 80 / 16%);
+    --sidebar-ring: oklch(0.72 0.1 80 / 55%);
+}
+
+.dark {
+    --background: oklch(0.145 0.004 60);
+    --foreground: oklch(0.97 0.01 90);
+    --card: oklch(0.19 0.006 60);
+    --card-foreground: oklch(0.97 0.01 90);
+    --popover: oklch(0.19 0.006 60);
+    --popover-foreground: oklch(0.97 0.01 90);
+    --primary: oklch(0.72 0.1 80);
+    --primary-foreground: oklch(0.145 0.01 60);
+    --secondary: oklch(0.24 0.006 60);
+    --secondary-foreground: oklch(0.97 0.01 90);
+    --muted: oklch(0.24 0.006 60);
+    --muted-foreground: oklch(0.65 0.015 80);
+    --accent: oklch(0.72 0.1 80);
+    --accent-foreground: oklch(0.145 0.01 60);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(0.72 0.1 80 / 16%);
+    --input: oklch(0.72 0.1 80 / 16%);
+    --ring: oklch(0.72 0.1 80 / 55%);
+    --chart-1: oklch(0.72 0.1 80);
+    --chart-2: oklch(0.6 0.08 80);
+    --chart-3: oklch(0.48 0.06 80);
+    --chart-4: oklch(0.36 0.04 80);
+    --chart-5: oklch(0.24 0.02 80);
+    --sidebar: oklch(0.145 0.004 60);
+    --sidebar-foreground: oklch(0.97 0.01 90);
+    --sidebar-primary: oklch(0.72 0.1 80);
+    --sidebar-primary-foreground: oklch(0.145 0.01 60);
+    --sidebar-accent: oklch(0.24 0.006 60);
+    --sidebar-accent-foreground: oklch(0.97 0.01 90);
+    --sidebar-border: oklch(0.72 0.1 80 / 16%);
+    --sidebar-ring: oklch(0.72 0.1 80 / 55%);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+  html {
+    @apply font-sans;
+    }
+}
+
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ── Shared portfolio primitives (mirrors the static site's design system) ── */
+.accent-text {
+  background: linear-gradient(100deg, #ac8b56 0%, #cdad69 30%, #f4e185 50%, #cdad69 70%, #ac8b56 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: accentShimmer 9s ease-in-out infinite;
+}
+
+@keyframes accentShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.glass-card {
+  background: color-mix(in oklch, var(--card) 55%, transparent);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: var(--radius-lg);
+}
+
+.section-glow {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(172, 139, 86, 0.08) 0%, transparent 65%);
+  filter: blur(55px);
+  animation: glowDrift 24s ease-in-out infinite;
+}
+
+.section-glow--left { top: 6%; left: -6%; width: 420px; height: 420px; }
+.section-glow--right { top: 10%; right: -6%; width: 460px; height: 460px; animation-delay: -9s; }
+.section-glow--bottom-left { bottom: -6%; left: -4%; width: 400px; height: 400px; animation-delay: -15s; }
+
+@keyframes glowDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -40px) scale(1.05); }
+  66% { transform: translate(-20px, 30px) scale(0.95); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-glow, .accent-text { animation: none; }
+}
+
+/* ── Orbiting skills — two counter-rotating rings; icon wrapper spins the
+   opposite direction of its ring at the same speed so the glyph stays
+   upright while it travels around the circle. ── */
+.orbit-ring, .orbit-icon {
+  animation-name: orbit-spin;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-ring, .orbit-icon { animation: none; }
+}

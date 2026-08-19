@@ -199,7 +199,7 @@ mobLinks.forEach(link => link.addEventListener('click', closeMobileMenu));
 /* ──────────────────────────────────────────
    SCROLL REVEAL — INTERSECTION OBSERVER
 ────────────────────────────────────────── */
-const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
+const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .word-pull');
 
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -216,7 +216,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 revealElements.forEach(el => revealObserver.observe(el));
 
 // Trigger hero elements immediately
-document.querySelectorAll('.hero .reveal-up, .hero .reveal-right').forEach((el, i) => {
+document.querySelectorAll('.hero .reveal-up, .hero .reveal-right, .hero .word-pull').forEach((el, i) => {
   setTimeout(() => el.classList.add('visible'), i * 150);
 });
 

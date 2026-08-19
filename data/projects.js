@@ -7,6 +7,197 @@
 
 export const PROJECTS = [
   {
+    id: "a11ylens",
+    slug: "a11ylens",
+    title: "A11yLens",
+    shortTitle: "A11yLens",
+    category: "AI & Automation",
+    categories: ["AI & Automation"],
+    year: null,
+    yearLabel: null,
+    featured: true,
+    priority: 1,
+    status: "completed",
+
+    shortDescription: "AI accessibility and performance auditor that scans any website for WCAG failures and returns a prioritized, plain-language fix list.",
+    description:
+      "A11yLens is an AI-powered accessibility and performance auditor built for small business websites. It scans any URL for WCAG accessibility failures and performance issues, then generates a prioritized, plain-language fix list — so teams without dedicated accessibility expertise can find and fix problems before customers do. The scan runs with no signup required, across desktop and mobile.",
+
+    technologies: ["Next.js", "AI/LLM", "WCAG"],
+    role: null,
+    platform: "Web App",
+    country: null,
+
+    image: "assets/project-a11ylens.png",
+    thumbnail: "assets/project-a11ylens.png",
+    gallery: [],
+    imageStatus: "OK — homepage screenshot",
+
+    githubUrl: null,
+    liveUrl: "https://a11ylens-nine.vercel.app/index.html",
+    linkStatus: "AVAILABLE",
+
+    caseStudy: null,
+
+    keyFeatures: [
+      "Free automated WCAG accessibility scan for any URL",
+      "Performance issue detection alongside accessibility failures",
+      "Prioritized, plain-language fix list",
+      "No signup required — desktop & mobile scanning",
+    ],
+    results: [],
+
+    challenge: "",
+    solution: "",
+    architecture: "",
+
+    reviewNotes: "",
+  },
+
+  {
+    id: "orchis",
+    slug: "orchis",
+    title: "Orchis",
+    shortTitle: "Orchis",
+    category: "AI & Automation",
+    categories: ["AI & Automation"],
+    year: null,
+    yearLabel: null,
+    featured: true,
+    priority: 2,
+    status: "completed",
+
+    shortDescription: "RAG-powered AI customer support agent that answers from an indexed knowledge base with a dashboard, conversation history, and analytics.",
+    description:
+      "Orchis is an AI customer support agent built on retrieval-augmented generation (RAG). It indexes a business's knowledge base and answers customer questions — product, ordering, payments, shipping, and returns — directly from that indexed content, with a full dashboard for conversation history, knowledge base management, and analytics. Powered by Llama 3.3 70B.",
+
+    technologies: ["RAG", "Llama 3.3 70B", "Vector Search", "React"],
+    role: null,
+    platform: "Web App",
+    country: null,
+
+    image: "assets/project-orchis.png",
+    thumbnail: "assets/project-orchis.png",
+    gallery: [],
+    imageStatus: "OK — app screenshot",
+
+    githubUrl: "https://github.com/BiLalAhmed01/AI-Customer-Support-Agent-RAG-",
+    liveUrl: null,
+    linkStatus: "AVAILABLE",
+
+    caseStudy: null,
+
+    keyFeatures: [
+      "RAG-based answers grounded in an indexed knowledge base",
+      "Conversation history and analytics dashboard",
+      "Suggested-question quick replies",
+      "Light/dark mode",
+    ],
+    results: [],
+
+    challenge: "",
+    solution: "",
+    architecture: "",
+
+    reviewNotes: "",
+  },
+
+  {
+    id: "firstreply",
+    slug: "firstreply",
+    title: "FirstReply",
+    shortTitle: "FirstReply",
+    category: "AI & Automation",
+    categories: ["AI & Automation"],
+    year: null,
+    yearLabel: null,
+    featured: true,
+    priority: 3,
+    status: "completed",
+
+    shortDescription: "Instant AI lead-response tool for small businesses, answering missed calls and WhatsApp messages in seconds from their own FAQ and pricing.",
+    description:
+      "FirstReply answers missed calls and WhatsApp messages for small businesses in seconds, using the business's own FAQ and pricing, and only escalates to a human when a customer actually needs one. Built for solo operators and small teams who lose leads to slower competitors while manually replying to every inquiry.",
+
+    technologies: ["AI/LLM", "WhatsApp API", "Automation"],
+    role: null,
+    platform: "Web App",
+    country: null,
+
+    image: "assets/project-firstreply.png",
+    thumbnail: "assets/project-firstreply.png",
+    gallery: [],
+    imageStatus: "OK — homepage screenshot",
+
+    githubUrl: "https://github.com/BiLalAhmed01/FirstReply",
+    liveUrl: null,
+    linkStatus: "AVAILABLE",
+
+    caseStudy: null,
+
+    keyFeatures: [
+      "Instant AI replies to missed calls and WhatsApp messages",
+      "Answers sourced from the business's own FAQ and pricing",
+      "Human hand-off only when needed",
+      "14-day free trial, no card required",
+    ],
+    results: [],
+
+    challenge: "",
+    solution: "",
+    architecture: "",
+
+    reviewNotes: "",
+  },
+
+  {
+    id: "tailorly",
+    slug: "tailorly",
+    title: "Tailorly",
+    shortTitle: "Tailorly",
+    category: "AI & Automation",
+    categories: ["AI & Automation"],
+    year: null,
+    yearLabel: null,
+    featured: true,
+    priority: 4,
+    status: "completed",
+
+    shortDescription: "Ethical AI job-application tailor that adapts a resume and cover letter to each role without fabricating experience.",
+    description:
+      "Tailorly tailors a resume and cover letter to each job opportunity without inventing claims. Every change it makes is explained, nothing is fabricated, and the candidate stays in control of what gets submitted — positioned around \"better applications, not more applications.\"",
+
+    technologies: ["AI/LLM", "Next.js"],
+    role: null,
+    platform: "Web App",
+    country: null,
+
+    image: "assets/project-tailorly.png",
+    thumbnail: "assets/project-tailorly.png",
+    gallery: [],
+    imageStatus: "OK — homepage screenshot",
+
+    githubUrl: "https://github.com/BiLalAhmed01/Tailorly",
+    liveUrl: null,
+    linkStatus: "AVAILABLE",
+
+    caseStudy: null,
+
+    keyFeatures: [
+      "Tailors resume and cover letter per job opportunity",
+      "No fabricated claims — every change explained",
+      "Candidate stays in control of submitted content",
+    ],
+    results: [],
+
+    challenge: "",
+    solution: "",
+    architecture: "",
+
+    reviewNotes: "",
+  },
+
+  {
     id: "fv-organization",
     slug: "fv-organization",
     title: "FV Organization",
@@ -16,7 +207,7 @@ export const PROJECTS = [
     year: null,
     yearLabel: null,
     featured: true,
-    priority: 1,
+    priority: 5,
     status: "completed",
 
     shortDescription: "WordPress platform for a UK-registered cultural & professional organization, handling event registration, ticketing, and international membership.",
@@ -64,7 +255,7 @@ export const PROJECTS = [
     year: null,
     yearLabel: null,
     featured: true,
-    priority: 2,
+    priority: 6,
     status: "completed",
 
     shortDescription: "Editorial-style site for an Australian commercial real estate consultancy specializing in retail leasing strategy and development.",
@@ -111,7 +302,7 @@ export const PROJECTS = [
     year: null,
     yearLabel: null,
     featured: false,
-    priority: 3,
+    priority: 7,
     status: "completed",
 
     shortDescription: "WooCommerce fashion storefront for a footwear & accessories brand, with product variants, wishlists, and multi-category catalog browsing.",
@@ -159,7 +350,7 @@ export const PROJECTS = [
     year: null,
     yearLabel: null,
     featured: true,
-    priority: 4,
+    priority: 8,
     status: "completed",
 
     shortDescription: "Marketing site for a lead-generation service connecting real estate, mortgage, and debt-relief professionals with qualified prospects.",
@@ -207,7 +398,7 @@ export const PROJECTS = [
     year: null,
     yearLabel: null,
     featured: false,
-    priority: 5,
+    priority: 9,
     status: "completed",
 
     shortDescription: "Local service business site for a licensed post-construction cleanup company serving Santa Barbara & San Luis Obispo counties, with quote-request flow.",
@@ -255,7 +446,7 @@ export const PROJECTS = [
     year: null,
     yearLabel: null,
     featured: false,
-    priority: 6,
+    priority: 10,
     status: "completed",
 
     shortDescription: "B2B catalog site for a Sialkot-based sportswear manufacturer, showcasing custom team kits and apparel with bulk quote requests.",

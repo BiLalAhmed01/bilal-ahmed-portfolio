@@ -1,0 +1,38 @@
+# Bilal Ahmed — AI Engineer
+
+> AI Engineer building AI solutions, automation systems, web applications and SaaS products.
+
+Bilal Ahmed (Chaudary Bilal Ahmed) is an AI Engineer based in Islamabad, Pakistan, working across AI
+integrations, automation systems, full-stack web development, and SaaS products.
+
+## Services
+
+- **AI Solutions** — AI agents, LLM integrations, AI-powered features, RAG systems, API integrations.
+- **Automation Solutions** — workflow automation, intelligent process automation, AI agents, third-party integrations.
+- **Webapp Solutions** — responsive websites, web applications, full-stack development, e-commerce, custom web solutions.
+- **SaaS Products** — SaaS platforms, business applications, dashboards, mobile applications.
+
+## Experience
+
+- Software Developer, RoboSoft Works (Jun 2025 — Present, Remote): WordPress/Elementor websites, AI-powered
+  content automation with Google Gemini, JavaScript/Python automation workflows.
+- Supervisor QA, PTCL (Jan 2026 — Present, Islamabad): technical audits, QA documentation, process compliance.
+- Software Developer, NESCOM Collaboration Project (Nov 2024 — Nov 2025, Hybrid): DIFM algorithm for real-time
+  RF signal detection, Python/MATLAB/DSP/FFT signal processing.
+- Web Development Summer Intern, InfinityBits (Jun 2023 — Aug 2023, Islamabad): React.js and Flutter apps,
+  WordPress theme/plugin customization.
+
+## Selected projects
+
+- A11yLens — AI accessibility and performance auditor. https://a11ylens-nine.vercel.app/
+- Orchis — RAG-powered AI customer support agent. https://github.com/BiLalAhmed01/AI-Customer-Support-Agent-RAG-
+- FirstReply — instant AI lead-response tool for small businesses. https://github.com/BiLalAhmed01/FirstReply
+- Tailorly — ethical AI job-application tailor. https://github.com/BiLalAhmed01/Tailorly
+- FV Organization — WordPress event/ticketing platform. https://fvorganization.org.uk/
+- Marked Property — Australian commercial real estate site. https://markedproperty.com.au/
+
+## Contact
+
+- Email: ch.bilal.ahmed595@gmail.com
+- GitHub: https://github.com/BiLalAhmed01
+- Location: Islamabad, Pakistan

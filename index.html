@@ -101,33 +101,20 @@
 
   <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
   <section class="section hero" id="home">
-    <div class="hero-content">
-      <div class="hero-text">
-        <div class="hero-badge reveal-up" style="--d:0ms">
-          <span class="badge-dot"></span>
-          Available for selected opportunities
-        </div>
-        <span class="hero-eyebrow reveal-up" style="--d:100ms">Web Developer</span>
-        <span class="hero-eyebrow-secondary reveal-up" style="--d:150ms">AI &amp; Automation Engineer</span>
-        <h1 class="hero-headline reveal-up" style="--d:200ms">
-          Building Modern Digital Experiences
-          <span class="accent-text">with Intelligent Technology.</span>
-        </h1>
-        <p class="hero-desc reveal-up" style="--d:350ms">
-          I design and develop responsive websites, web applications, e-commerce platforms and custom digital solutions, while integrating AI and automation to create smarter, more efficient experiences.
-        </p>
-        <div class="hero-actions reveal-up" style="--d:500ms">
-          <a href="#projects" class="btn btn-primary">View Selected Work</a>
-          <a href="#contact" class="btn btn-ghost">Let's Work Together</a>
-        </div>
-        <div class="hero-meta reveal-up" style="--d:650ms">
-          <span>Web Development</span>
-          <span>AI &amp; Automation</span>
-          <span>Digital Products</span>
-        </div>
+    <div class="hero-frame">
+      <div class="hero-frame-bg" aria-hidden="true">
+        <div class="hero-frame-grid"></div>
+        <div class="hero-frame-glow hero-frame-glow-1"></div>
+        <div class="hero-frame-glow hero-frame-glow-2"></div>
+        <div class="hero-frame-noise"></div>
       </div>
 
-      <div class="hero-visual reveal-right" style="--d:300ms" aria-hidden="true">
+      <div class="hero-badge hero-frame-badge reveal-up" style="--d:0ms">
+        <span class="badge-dot"></span>
+        Available for selected opportunities
+      </div>
+
+      <div class="hero-visual hero-frame-visual reveal-right" style="--d:250ms" aria-hidden="true">
         <div class="flow-diagram">
           <div class="flow-node" style="--fd:0ms">
             <span class="flow-dot"></span>
@@ -150,10 +137,42 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="hero-scroll-hint">
-      <div class="scroll-line"></div>
-      <span>scroll</span>
+
+      <div class="hero-frame-content">
+        <div class="hero-frame-name">
+          <span class="hero-eyebrow reveal-up" style="--d:100ms">Web Developer</span>
+          <span class="hero-eyebrow-secondary reveal-up" style="--d:150ms">AI &amp; Automation Engineer</span>
+          <h1 class="hero-giant" aria-label="Bilal Ahmed">
+            <span class="hero-giant-line word-pull" style="--d:0ms">Bilal</span>
+            <span class="hero-giant-line hero-giant-accent word-pull" style="--d:120ms">Ahmed</span>
+          </h1>
+        </div>
+
+        <div class="hero-frame-side">
+          <p class="hero-desc reveal-up" style="--d:450ms">
+            I design and develop responsive websites, web applications, e-commerce platforms and custom digital solutions, while integrating AI and automation to create smarter, more efficient experiences.
+          </p>
+          <div class="hero-frame-actions reveal-up" style="--d:550ms">
+            <a href="#projects" class="btn-pill">
+              View Selected Work
+              <span class="btn-pill-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+              </span>
+            </a>
+            <a href="#contact" class="btn btn-ghost">Let's Work Together</a>
+          </div>
+          <div class="hero-meta reveal-up" style="--d:650ms">
+            <span>Web Development</span>
+            <span>AI &amp; Automation</span>
+            <span>Digital Products</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-scroll-hint">
+        <div class="scroll-line"></div>
+        <span>scroll</span>
+      </div>
     </div>
   </section>
 
@@ -226,6 +245,7 @@
 
   <!-- ═══════════════════════════════ EXPERIENCE ═══════════════════════════════ -->
   <section class="section" id="experience">
+    <div class="section-glow section-glow--right" aria-hidden="true"></div>
     <div class="container">
       <div class="section-header reveal-up">
         <span class="section-tag">02 / Experience</span>
@@ -233,8 +253,33 @@
       </div>
       <div class="exp-list">
 
-        <article class="exp-item reveal-left">
+        <article class="exp-item exp-featured reveal-left">
           <span class="exp-index">01</span>
+          <div class="exp-body">
+            <div class="exp-head">
+              <div>
+                <h3 class="exp-role">Software Developer</h3>
+                <span class="exp-company">RoboSoft Works</span>
+              </div>
+              <div class="exp-meta">
+                <span class="exp-date">Jun 2025 — Present</span>
+                <span class="tc-type remote">Remote</span>
+              </div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Design, develop, and maintain responsive, SEO-friendly websites, including e-commerce, portfolio, corporate, and service provider websites, by customizing themes, templates, layouts, and UI components to improve performance, accessibility, and user experience.</li>
+              <li>Develop and troubleshoot custom web solutions using WordPress, Elementor, HTML, CSS, JavaScript, and REST APIs, delivering tailored functionality for client requirements and building feature-rich websites for businesses across multiple industries, with transferable experience in theme-based platforms such as Shopify.</li>
+              <li>Build AI-powered content automation workflows using JavaScript and Python, integrating third-party APIs, including Google Gemini, to streamline content generation, automate repetitive tasks, and reduce manual effort.</li>
+              <li>Manage source code, version control, and collaborative development workflows using Git and GitHub, ensuring efficient code reviews, issue resolution, and timely project delivery while adhering to development best practices.</li>
+            </ul>
+            <div class="exp-tags">
+              <span class="tag">WordPress</span><span class="tag">Elementor</span><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">REST APIs</span><span class="tag">Python</span><span class="tag">Google Gemini</span><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">SEO</span><span class="tag">Automation</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="exp-item reveal-right" style="--d:120ms">
+          <span class="exp-index">02</span>
           <div class="exp-body">
             <div class="exp-head">
               <div>
@@ -254,31 +299,6 @@
             </ul>
             <div class="exp-tags">
               <span class="tag">Quality Assurance</span><span class="tag">Technical Auditing</span><span class="tag">Technical Inspections</span><span class="tag">Documentation</span><span class="tag">Reporting</span><span class="tag">Troubleshooting</span><span class="tag">Process Compliance</span><span class="tag">Technical Operations</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="exp-item exp-featured reveal-right" style="--d:120ms">
-          <span class="exp-index">02</span>
-          <div class="exp-body">
-            <div class="exp-head">
-              <div>
-                <h3 class="exp-role">Web Developer</h3>
-                <span class="exp-company">RoboSoft Works</span>
-              </div>
-              <div class="exp-meta">
-                <span class="exp-date">Jun 2025 — Present</span>
-                <span class="tc-type remote">Remote</span>
-              </div>
-            </div>
-            <ul class="exp-bullets">
-              <li>Design, develop, and maintain responsive, SEO-friendly websites, including e-commerce, portfolio, corporate, and service provider websites, by customizing themes, templates, layouts, and UI components to improve performance, accessibility, and user experience.</li>
-              <li>Develop and troubleshoot custom web solutions using WordPress, Elementor, HTML, CSS, JavaScript, and REST APIs, delivering tailored functionality for client requirements and building feature-rich websites for businesses across multiple industries, with transferable experience in theme-based platforms such as Shopify.</li>
-              <li>Build AI-powered content automation workflows using JavaScript and Python, integrating third-party APIs, including Google Gemini, to streamline content generation, automate repetitive tasks, and reduce manual effort.</li>
-              <li>Manage source code, version control, and collaborative development workflows using Git and GitHub, ensuring efficient code reviews, issue resolution, and timely project delivery while adhering to development best practices.</li>
-            </ul>
-            <div class="exp-tags">
-              <span class="tag">WordPress</span><span class="tag">Elementor</span><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">REST APIs</span><span class="tag">Python</span><span class="tag">Google Gemini</span><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">SEO</span><span class="tag">Automation</span>
             </div>
           </div>
         </article>
@@ -340,6 +360,7 @@
 
   <!-- ═══════════════════════════════ EDUCATION ═══════════════════════════════ -->
   <section class="section" id="education">
+    <div class="section-glow section-glow--bottom-left" aria-hidden="true"></div>
     <div class="container">
       <div class="section-header reveal-up">
         <span class="section-tag">03 / Education</span>
@@ -347,24 +368,24 @@
       </div>
       <div class="edu-grid">
         <div class="edu-item glass-card reveal-up" style="--d:0ms">
-          <div class="edu-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147L12 15l7.74-4.853a1.125 1.125 0 011.134-.018l.396.222a1.125 1.125 0 01.546 1.159l-.351 2.373a1.125 1.125 0 01-.523.858L12 20.25l-8.941-5.51a1.125 1.125 0 01-.523-.858l-.351-2.373a1.125 1.125 0 01.546-1.159l.396-.222a1.125 1.125 0 011.134.018z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5l10.5 6-10.5 6-10.5-6L12 4.5z" /></svg>
+          <div class="edu-photo">
+            <img src="assets/edu/uet-taxila.jpg" alt="University of Engineering and Technology, Taxila campus gate" loading="lazy" width="1094" height="730">
           </div>
           <span class="edu-year">2021 — 2025</span>
           <h3 class="edu-degree">BS Computer Engineering</h3>
           <p class="edu-school">UET Taxila</p>
         </div>
         <div class="edu-item glass-card reveal-up" style="--d:150ms">
-          <div class="edu-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18c-2.305 0-4.408.867-6 2.292m0-14.25v14.25" /></svg>
+          <div class="edu-photo">
+            <img src="assets/edu/scienta-vision.jpg" alt="Scienta Vision School and College building, Islamabad" loading="lazy" width="670" height="1194">
           </div>
           <span class="edu-year">2019 — 2021</span>
           <h3 class="edu-degree">FSc Pre-Engineering</h3>
           <p class="edu-school">Scienta Vision, Islamabad</p>
         </div>
         <div class="edu-item glass-card reveal-up" style="--d:300ms">
-          <div class="edu-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <div class="edu-photo">
+            <img src="assets/edu/sls-montessori.jpg" alt="SLS Montessori school building, Islamabad" loading="lazy" width="1094" height="730">
           </div>
           <span class="edu-year">2017 — 2019</span>
           <h3 class="edu-degree">Matriculation in Science</h3>
@@ -376,6 +397,7 @@
 
   <!-- ═══════════════════════════════ SELECTED WORK (PROJECTS) ═══════════════════════════════ -->
   <section class="section sw-section" id="projects">
+    <div class="section-glow section-glow--left" aria-hidden="true"></div>
     <div class="container">
 
       <div class="sw-intro">
@@ -395,6 +417,7 @@
 
   <!-- ═══════════════════════════════ SERVICES / WHAT I BUILD ═══════════════════════════════ -->
   <section class="section" id="services">
+    <div class="section-glow section-glow--right" aria-hidden="true"></div>
     <div class="container">
       <div class="section-header reveal-up">
         <span class="section-tag">05 / Services</span>
@@ -464,6 +487,7 @@
 
   <!-- ═══════════════════════════════ SKILLS ═══════════════════════════════ -->
   <section class="section" id="skills">
+    <div class="section-glow section-glow--left" aria-hidden="true"></div>
     <div class="container">
       <div class="section-header reveal-up">
         <span class="section-tag">06 / Skills</span>

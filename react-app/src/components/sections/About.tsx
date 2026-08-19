@@ -148,7 +148,11 @@ export function About() {
                 </div>
                 <div className="flex items-center justify-between gap-4">
                   <dt className="text-muted-foreground">Phone</dt>
-                  <dd className="font-medium text-foreground">+92 334 7066654</dd>
+                  <dd>
+                    <a href="tel:+923347066654" className="font-medium text-foreground hover:text-primary">
+                      +92 334 7066654
+                    </a>
+                  </dd>
                 </div>
               </dl>
             </div>

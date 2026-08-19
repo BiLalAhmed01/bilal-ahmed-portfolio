@@ -34,6 +34,15 @@ export function LiquidMetalButton({
   const shaderMount = useRef<any>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const rippleId = useRef(0);
+  const rippleTimeouts = useRef(new Set<ReturnType<typeof setTimeout>>());
+
+  useEffect(() => {
+    const timeouts = rippleTimeouts.current;
+    return () => {
+      timeouts.forEach(clearTimeout);
+      timeouts.clear();
+    };
+  }, []);
 
   const dimensions = useMemo(() => {
     if (viewMode === "icon") {
@@ -167,9 +176,11 @@ export function LiquidMetalButton({
       const ripple = { x, y, id: rippleId.current++ };
 
       setRipples((prev) => [...prev, ripple]);
-      setTimeout(() => {
+      const timeoutId = setTimeout(() => {
+        rippleTimeouts.current.delete(timeoutId);
         setRipples((prev) => prev.filter((r) => r.id !== ripple.id));
       }, 600);
+      rippleTimeouts.current.add(timeoutId);
     }
 
     onClick?.();

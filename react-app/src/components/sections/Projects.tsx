@@ -201,8 +201,8 @@ export function Projects() {
     [category]
   );
 
-  const next = () => setActiveIndex((p) => (p + 1) % list.length);
-  const prev = () => setActiveIndex((p) => (p - 1 + list.length) % list.length);
+  const next = () => list.length && setActiveIndex((p) => (p + 1) % list.length);
+  const prev = () => list.length && setActiveIndex((p) => (p - 1 + list.length) % list.length);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const clientX = e.clientX;

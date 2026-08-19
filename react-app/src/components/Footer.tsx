@@ -8,6 +8,7 @@ import { LogoMark } from "@/components/LogoMark";
 const NAV_LINKS = [
   { href: "#about", label: "About" },
   { href: "#experience", label: "Experience" },
+  { href: "#education", label: "Education" },
   { href: "#projects", label: "Projects" },
   { href: "#services", label: "Services" },
 ];

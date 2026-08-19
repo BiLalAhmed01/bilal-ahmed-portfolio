@@ -39,7 +39,6 @@ const entries: TimelineEntry[] = EXPERIENCE.map((exp) => ({
   badge: exp.type,
   icon: TYPE_STYLES[exp.type].icon,
   accent: TYPE_STYLES[exp.type].accent,
-  image: exp.image,
   bullets: exp.bullets,
   tags: exp.tags,
 }));

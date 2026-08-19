@@ -6,7 +6,6 @@ export interface ExperienceEntry {
   type: "Remote" | "Onsite" | "Hybrid";
   location?: string;
   featured?: boolean;
-  image: string;
   bullets: string[];
   tags: string[];
 }
@@ -19,7 +18,6 @@ export const EXPERIENCE: ExperienceEntry[] = [
     date: "Jun 2025 — Present",
     type: "Remote",
     featured: true,
-    image: "https://images.unsplash.com/photo-1487338875411-8880f74114a2?auto=format&fit=crop&w=1200&q=80",
     bullets: [
       "Design, develop, and maintain responsive, SEO-friendly websites, including e-commerce, portfolio, corporate, and service provider websites, by customizing themes, templates, layouts, and UI components to improve performance, accessibility, and user experience.",
       "Develop and troubleshoot custom web solutions using WordPress, Elementor, HTML, CSS, JavaScript, and REST APIs, delivering tailored functionality for client requirements and building feature-rich websites for businesses across multiple industries, with transferable experience in theme-based platforms such as Shopify.",
@@ -35,7 +33,6 @@ export const EXPERIENCE: ExperienceEntry[] = [
     date: "Jan 2026 — Present",
     type: "Onsite",
     location: "Islamabad, Pakistan",
-    image: "https://images.unsplash.com/photo-1785682117028-6fcf2c0b515b?auto=format&fit=crop&w=1200&q=80",
     bullets: [
       "Conduct detailed technical audits and inspections against defined deployment and quality standards, following documented instructions precisely.",
       "Prepare and review QA documentation and reports, strengthening process transparency and accountability.",
@@ -49,7 +46,6 @@ export const EXPERIENCE: ExperienceEntry[] = [
     company: "NESCOM Collaboration Project",
     date: "Nov 2024 — Nov 2025",
     type: "Hybrid",
-    image: "https://images.unsplash.com/photo-1580063665860-af92a61c2810?auto=format&fit=crop&w=1200&q=80",
     bullets: [
       "Developed a Digital Instantaneous Frequency Measurement (DIFM) algorithm for real-time multi-signal detection within the 1–2 GHz RF spectrum.",
       "Implemented Python, MATLAB, DSP, and FFT-based signal processing techniques for frequency estimation and multi-signal analysis.",
@@ -66,7 +62,6 @@ export const EXPERIENCE: ExperienceEntry[] = [
     date: "Jun 2023 — Aug 2023",
     type: "Onsite",
     location: "Islamabad, Pakistan",
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
     bullets: [
       "Developed and optimized responsive web and mobile applications using React.js and Flutter.",
       "Enhanced UI/UX using modern development frameworks and best practices to improve usability and responsiveness.",

@@ -13,7 +13,9 @@ export interface TimelineEntry {
    *  consistent, the way the reference component color-codes by category. */
   accent: { badge: string; node: string; dot: string };
   icon: LucideIcon;
-  image: string;
+  /** Omit for entries with no real, relevant photo — the card renders
+   *  text-only rather than filling the slot with a generic stock image. */
+  image?: string;
   bullets?: string[];
   tags?: string[];
 }
@@ -46,27 +48,37 @@ export function Timeline({ entries }: { entries: TimelineEntry[] }) {
                 className={`ml-14 md:ml-0 md:w-[calc(50%-2.5rem)] ${isRight ? "md:ml-auto" : "md:mr-auto"}`}
               >
                 <div className="glass-card overflow-hidden">
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    <img
-                      src={entry.image}
-                      alt={`${entry.title} — ${entry.subtitle}`}
-                      loading="lazy"
-                      className="h-full w-full object-cover"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                    <span
-                      className={`absolute right-3 top-3 rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-wide backdrop-blur-sm ${entry.accent.badge}`}
-                    >
-                      {entry.badge}
-                    </span>
-                  </div>
+                  {entry.image ? (
+                    <div className="relative aspect-[16/10] overflow-hidden">
+                      <img
+                        src={entry.image}
+                        alt={`${entry.title} — ${entry.subtitle}`}
+                        loading="lazy"
+                        className="h-full w-full object-cover"
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                      <span
+                        className={`absolute right-3 top-3 rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-wide backdrop-blur-sm ${entry.accent.badge}`}
+                      >
+                        {entry.badge}
+                      </span>
+                    </div>
+                  ) : null}
 
                   <div className="p-6">
                     <div className="flex items-center justify-between gap-3">
                       <span className="font-mono text-xs uppercase tracking-wide text-muted-foreground">
                         {entry.date}
                       </span>
-                      <span className={`h-2 w-2 flex-none rounded-full ${entry.accent.dot}`} />
+                      {entry.image ? (
+                        <span className={`h-2 w-2 flex-none rounded-full ${entry.accent.dot}`} />
+                      ) : (
+                        <span
+                          className={`rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-wide ${entry.accent.badge}`}
+                        >
+                          {entry.badge}
+                        </span>
+                      )}
                     </div>
                     <h3 className="mt-2 text-lg font-bold text-foreground">{entry.title}</h3>
                     <p className="mt-0.5 text-sm text-primary">{entry.subtitle}</p>

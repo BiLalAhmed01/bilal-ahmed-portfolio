@@ -14,6 +14,13 @@ describe("Nav", () => {
     expect(screen.getAllByRole("link", { name: "About" }).length).toBeGreaterThan(0);
   });
 
+  it("marks the closed mobile menu inert so its links aren't keyboard-focusable", () => {
+    render(<Nav />);
+    const closedLinks = screen.getAllByRole("link", { name: "About", hidden: true });
+    const mobileOnlyLink = closedLinks.find((el) => el.closest("[aria-hidden='true']"));
+    expect(mobileOnlyLink?.closest("[inert]")).not.toBeNull();
+  });
+
   it("closes the mobile menu when a link is clicked", async () => {
     const user = userEvent.setup();
     render(<Nav />);

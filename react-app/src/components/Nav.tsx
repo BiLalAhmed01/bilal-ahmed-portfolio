@@ -64,6 +64,8 @@ export function Nav() {
       </nav>
 
       <div
+        aria-hidden={!open}
+        inert={!open}
         className={`fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-background/98 backdrop-blur-lg transition-opacity lg:hidden ${
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}

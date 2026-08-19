@@ -1,31 +1,38 @@
-import { useState, type FormEvent, type ChangeEvent } from "react";
+import { useRef, useState, type FormEvent, type ChangeEvent } from "react";
 import { Mail, MapPin, Sparkles } from "lucide-react";
 import { GithubIcon } from "@/components/icons/GithubIcon";
 import { Reveal } from "@/components/Reveal";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 
-function encode(data: Record<string, string>) {
-  return Object.keys(data)
-    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
-    .join("&");
-}
+// Formspree endpoint for this site's contact form — https://formspree.io/f/<id>
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xaewlknp";
 
 export function Contact() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (field: keyof typeof form) => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((f) => ({ ...f, [field]: e.target.value }));
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Honeypot tripped — silently pretend success without actually submitting.
+    if (honeypotRef.current?.value) {
+      setStatus("sent");
+      setForm({ name: "", email: "", subject: "", message: "" });
+      return;
+    }
+
     setStatus("sending");
     try {
-      await fetch("/", {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode({ "form-name": "contact", ...form }),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(form),
       });
+      if (!res.ok) throw new Error(`Formspree responded ${res.status}`);
       setStatus("sent");
       setForm({ name: "", email: "", subject: "", message: "" });
     } catch {
@@ -116,9 +123,6 @@ export function Contact() {
             <div className="section-glow section-glow--right !top-0" />
             <form
               name="contact"
-              method="POST"
-              data-netlify="true"
-              netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
               className="glass-card relative z-10 flex flex-col gap-5 overflow-hidden p-6 md:p-8"
             >
@@ -127,10 +131,9 @@ export function Contact() {
               <span className="pointer-events-none absolute bottom-3 left-3 h-5 w-5 border-b-2 border-l-2 border-primary/50" />
               <span className="pointer-events-none absolute bottom-3 right-3 h-5 w-5 border-b-2 border-r-2 border-primary/50" />
               <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-primary/10 to-transparent" />
-              <input type="hidden" name="form-name" value="contact" />
               <p className="hidden">
                 <label>
-                  Leave this field empty <input name="bot-field" tabIndex={-1} autoComplete="off" />
+                  Leave this field empty <input ref={honeypotRef} name="_gotcha" tabIndex={-1} autoComplete="off" />
                 </label>
               </p>
 

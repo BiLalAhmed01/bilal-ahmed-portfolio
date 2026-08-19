@@ -89,7 +89,7 @@ export function About() {
                   </span>
                   <span className="mt-1 block text-xs leading-snug text-muted-foreground">
                     {s.label}
-                    {s.sub ? <span className="block text-[10px] text-muted-foreground/70">{s.sub}</span> : null}
+                    {s.sub ? <span className="block text-[10px] text-muted-foreground">{s.sub}</span> : null}
                   </span>
                 </div>
               ))}

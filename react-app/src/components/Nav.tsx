@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
+import { LogoMark } from "@/components/LogoMark";
 
 const goToContact = () => {
   window.location.hash = "contact";
@@ -23,9 +24,7 @@ export function Nav() {
       <nav className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/70 backdrop-blur-md">
         <div className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-6 md:px-8">
           <a href="#home" className="flex items-center gap-2 font-bold">
-            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10 text-sm text-primary">
-              BA
-            </span>
+            <LogoMark className="h-8 w-8 rounded-md" />
             <span className="hidden text-sm text-foreground sm:inline">Bilal Ahmed</span>
           </a>
 

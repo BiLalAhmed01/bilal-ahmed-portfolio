@@ -1,5 +1,6 @@
 import { Bot, Code2, Workflow } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
+import { LogoMark } from "@/components/LogoMark";
 
 const FOCUS_AREAS = [
   { label: "AI Systems", icon: Bot },
@@ -111,9 +112,7 @@ export function About() {
               </div>
 
               <div className="relative mt-6 flex items-center gap-4">
-                <div className="flex h-14 w-14 flex-none items-center justify-center rounded-full border border-primary/30 bg-gradient-to-br from-primary/20 to-primary/5 text-lg font-bold text-primary">
-                  BA
-                </div>
+                <LogoMark className="h-14 w-14 flex-none rounded-full" />
                 <div>
                   <span className="block text-2xl font-bold">Bilal Ahmed</span>
                   <div className="mt-1 flex flex-wrap items-center gap-2 text-sm">

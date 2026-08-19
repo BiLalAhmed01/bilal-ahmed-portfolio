@@ -3,6 +3,7 @@ import { GithubIcon } from "@/components/icons/GithubIcon";
 import { InstagramIcon } from "@/components/icons/InstagramIcon";
 import { TextHoverEffect } from "@/components/TextHoverEffect";
 import { SocialIconButton } from "@/components/SocialIconButton";
+import { LogoMark } from "@/components/LogoMark";
 
 const NAV_LINKS = [
   { href: "#about", label: "About" },
@@ -47,9 +48,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-[1.3fr_0.7fr_0.7fr_1fr]">
           <div>
             <a href="#home" className="inline-flex items-center gap-2 font-bold">
-              <span className="flex h-9 w-9 items-center justify-center rounded-md border border-primary/30 bg-gradient-to-br from-primary/20 to-primary/5 text-sm text-primary">
-                BA
-              </span>
+              <LogoMark className="h-9 w-9 rounded-md" />
               <span className="text-foreground">Bilal Ahmed</span>
             </a>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">

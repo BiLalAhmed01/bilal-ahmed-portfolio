@@ -15,11 +15,14 @@ export function Reveal({
   delay = 0,
   className = "",
   tilt = false,
+  distance,
 }: {
   children: ReactNode;
   direction?: Direction;
   delay?: number;
   className?: string;
+  /** Overrides the default 24px travel distance for a more pronounced reveal. */
+  distance?: number;
   /** Scroll-scrubbed 3D tilt-in, adapted from Aceternity's ContainerScroll
    *  technique (see components/ui/container-scroll-animation.tsx) — the
    *  element rotates/scales in continuously as it scrolls through the
@@ -31,7 +34,11 @@ export function Reveal({
 }) {
   if (tilt) return <TiltReveal className={className}>{children}</TiltReveal>;
 
-  const offset = offsets[direction];
+  const base = offsets[direction];
+  const offset =
+    distance === undefined
+      ? base
+      : { x: Math.sign(base.x) * distance, y: Math.sign(base.y || (direction === "up" ? 1 : 0)) * distance };
   const variants: Variants = {
     hidden: { opacity: 0, x: offset.x, y: offset.y, filter: "blur(4px)" },
     visible: {

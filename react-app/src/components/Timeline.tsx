@@ -40,7 +40,8 @@ export function Timeline({ entries }: { entries: TimelineEntry[] }) {
               </div>
 
               <Reveal
-                direction={isRight ? "right" : "left"}
+                direction="up"
+                distance={72}
                 delay={Math.min(i, 4) * 0.08}
                 className={`ml-14 md:ml-0 md:w-[calc(50%-2.5rem)] ${isRight ? "md:ml-auto" : "md:mr-auto"}`}
               >

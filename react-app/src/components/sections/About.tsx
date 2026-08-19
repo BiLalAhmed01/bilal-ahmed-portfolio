@@ -1,4 +1,17 @@
+import { Bot, Code2, Workflow } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
+
+const FOCUS_AREAS = [
+  { label: "AI Systems", icon: Bot },
+  { label: "Automation", icon: Workflow },
+  { label: "Frontend", icon: Code2 },
+];
+
+const STATS = [
+  { value: "2+", label: "Years Experience" },
+  { value: "11+", label: "Projects Shipped" },
+  { value: "4", label: "Companies" },
+];
 
 export function About() {
   return (
@@ -33,37 +46,66 @@ export function About() {
                 into practical, scalable and user-friendly solutions.
               </p>
             </Reveal>
-            <Reveal direction="left" delay={0.21} className="mt-6 flex flex-wrap gap-2">
-              {["AI Systems", "Automation", "Frontend"].map((p) => (
+
+            <Reveal direction="left" delay={0.21} className="mt-6 flex flex-wrap gap-2.5">
+              {FOCUS_AREAS.map(({ label, icon: Icon }) => (
                 <span
-                  key={p}
-                  className="rounded-full border border-border bg-secondary/40 px-4 py-1.5 text-xs font-medium text-foreground"
+                  key={label}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary/40 px-4 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-primary/50"
                 >
-                  {p}
+                  <Icon className="h-3.5 w-3.5 text-primary" strokeWidth={1.75} />
+                  {label}
                 </span>
+              ))}
+            </Reveal>
+
+            <Reveal
+              direction="left"
+              delay={0.28}
+              className="mt-10 grid grid-cols-3 gap-4 border-t border-border pt-8"
+            >
+              {STATS.map((s) => (
+                <div key={s.label}>
+                  <span className="accent-text block text-2xl font-extrabold tracking-tight sm:text-3xl">
+                    {s.value}
+                  </span>
+                  <span className="mt-1 block text-xs text-muted-foreground">{s.label}</span>
+                </div>
               ))}
             </Reveal>
           </div>
 
           <Reveal tilt>
-            <div className="glass-card p-8">
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <div className="glass-card relative overflow-hidden p-8">
+              {/* decorative frame corners — echoes the framed image panels elsewhere on the site */}
+              <span className="pointer-events-none absolute left-3 top-3 h-5 w-5 border-l-2 border-t-2 border-primary/50" />
+              <span className="pointer-events-none absolute right-3 top-3 h-5 w-5 border-r-2 border-t-2 border-primary/50" />
+              <span className="pointer-events-none absolute bottom-3 left-3 h-5 w-5 border-b-2 border-l-2 border-primary/50" />
+              <span className="pointer-events-none absolute bottom-3 right-3 h-5 w-5 border-b-2 border-r-2 border-primary/50" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-primary/10 to-transparent" />
+
+              <div className="relative flex items-center gap-2 text-xs text-muted-foreground">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary shadow-[0_0_8px_rgba(172,139,86,0.6)]" />
                 Available for opportunities
               </div>
 
-              <div className="mt-6">
-                <span className="block text-2xl font-bold">Bilal Ahmed</span>
-                <div className="mt-1 flex flex-wrap items-center gap-2 text-sm">
-                  <span className="text-primary">AI Engineer</span>
-                  <span className="h-1 w-1 rounded-full bg-border" />
-                  <span className="text-muted-foreground">Automation &amp; Web Solutions</span>
+              <div className="relative mt-6 flex items-center gap-4">
+                <div className="flex h-14 w-14 flex-none items-center justify-center rounded-full border border-primary/30 bg-gradient-to-br from-primary/20 to-primary/5 text-lg font-bold text-primary">
+                  BA
+                </div>
+                <div>
+                  <span className="block text-2xl font-bold">Bilal Ahmed</span>
+                  <div className="mt-1 flex flex-wrap items-center gap-2 text-sm">
+                    <span className="text-primary">AI Engineer</span>
+                    <span className="h-1 w-1 rounded-full bg-border" />
+                    <span className="text-muted-foreground">Automation &amp; Web Solutions</span>
+                  </div>
                 </div>
               </div>
 
-              <div className="my-6 h-px bg-border" />
+              <div className="relative my-6 h-px bg-border" />
 
-              <dl className="space-y-4 text-sm">
+              <dl className="relative space-y-4 text-sm">
                 {[
                   ["Based in", "Islamabad, Pakistan"],
                   ["Focus", "AI · Automation · Web"],

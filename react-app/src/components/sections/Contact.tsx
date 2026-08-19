@@ -1,5 +1,5 @@
 import { useState, type FormEvent, type ChangeEvent } from "react";
-import { Mail } from "lucide-react";
+import { Mail, MapPin, Sparkles } from "lucide-react";
 import { GithubIcon } from "@/components/icons/GithubIcon";
 import { Reveal } from "@/components/Reveal";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
@@ -54,42 +54,61 @@ export function Contact() {
               </p>
             </Reveal>
 
-            <Reveal direction="left" delay={0.12} className="mt-8 space-y-4">
+            <Reveal direction="left" delay={0.12} className="mt-8 space-y-1">
               {[
-                { label: "Email", value: "ch.bilal.ahmed595@gmail.com", href: "mailto:ch.bilal.ahmed595@gmail.com" },
-                { label: "Location", value: "Islamabad, Pakistan" },
-                { label: "Available For", value: "AI & Automation · Web Development · Freelance Projects" },
+                {
+                  label: "Email",
+                  value: "ch.bilal.ahmed595@gmail.com",
+                  href: "mailto:ch.bilal.ahmed595@gmail.com",
+                  icon: Mail,
+                },
+                { label: "Location", value: "Islamabad, Pakistan", icon: MapPin },
+                {
+                  label: "Available For",
+                  value: "AI & Automation · Web Development · Freelance Projects",
+                  icon: Sparkles,
+                },
               ].map((item) => (
-                <div key={item.label} className="flex flex-col gap-0.5 border-b border-border pb-3 text-sm sm:flex-row sm:items-center sm:justify-between">
-                  <span className="text-muted-foreground">{item.label}</span>
+                <div
+                  key={item.label}
+                  className="flex flex-col gap-1 border-b border-border py-3 text-sm sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+                >
+                  <span className="flex items-center gap-2 text-muted-foreground">
+                    <item.icon className="h-3.5 w-3.5 text-primary" strokeWidth={1.75} />
+                    {item.label}
+                  </span>
                   {item.href ? (
                     <a href={item.href} className="font-medium text-primary hover:underline">
                       {item.value}
                     </a>
                   ) : (
-                    <span className="font-medium text-foreground">{item.value}</span>
+                    <span className="font-medium text-foreground sm:text-right">{item.value}</span>
                   )}
                 </div>
               ))}
             </Reveal>
 
-            <Reveal direction="left" delay={0.18} className="mt-6 flex gap-3">
+            <Reveal direction="left" delay={0.18} className="mt-8 flex items-center gap-3">
               <a
                 href="https://github.com/BiLalAhmed01"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary hover:shadow-[0_0_16px_rgba(172,139,86,0.25)]"
               >
                 <GithubIcon className="h-4 w-4" />
               </a>
               <a
                 href="mailto:ch.bilal.ahmed595@gmail.com"
                 aria-label="Email"
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary hover:shadow-[0_0_16px_rgba(172,139,86,0.25)]"
               >
                 <Mail className="h-4 w-4" />
               </a>
+              <span className="ml-1 flex items-center gap-2 text-xs text-muted-foreground">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary shadow-[0_0_8px_rgba(172,139,86,0.6)]" />
+                Usually replies within 24 hours
+              </span>
             </Reveal>
           </div>
 
@@ -101,8 +120,13 @@ export function Contact() {
               data-netlify="true"
               netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
-              className="glass-card relative z-10 flex flex-col gap-5 p-6 md:p-8"
+              className="glass-card relative z-10 flex flex-col gap-5 overflow-hidden p-6 md:p-8"
             >
+              <span className="pointer-events-none absolute left-3 top-3 h-5 w-5 border-l-2 border-t-2 border-primary/50" />
+              <span className="pointer-events-none absolute right-3 top-3 h-5 w-5 border-r-2 border-t-2 border-primary/50" />
+              <span className="pointer-events-none absolute bottom-3 left-3 h-5 w-5 border-b-2 border-l-2 border-primary/50" />
+              <span className="pointer-events-none absolute bottom-3 right-3 h-5 w-5 border-b-2 border-r-2 border-primary/50" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-primary/10 to-transparent" />
               <input type="hidden" name="form-name" value="contact" />
               <p className="hidden">
                 <label>
@@ -124,7 +148,7 @@ export function Contact() {
                     placeholder="Your name"
                     value={form.name}
                     onChange={handleChange("name")}
-                    className="rounded-lg border border-border bg-background/60 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none"
+                    className="rounded-lg border border-border bg-background/60 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 transition-shadow focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/15"
                   />
                 </div>
                 <div className="flex flex-col gap-1.5">
@@ -141,7 +165,7 @@ export function Contact() {
                     placeholder="you@example.com"
                     value={form.email}
                     onChange={handleChange("email")}
-                    className="rounded-lg border border-border bg-background/60 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none"
+                    className="rounded-lg border border-border bg-background/60 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 transition-shadow focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/15"
                   />
                 </div>
               </div>
@@ -158,7 +182,7 @@ export function Contact() {
                   placeholder="What can I help you with?"
                   value={form.subject}
                   onChange={handleChange("subject")}
-                  className="rounded-lg border border-border bg-background/60 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none"
+                  className="rounded-lg border border-border bg-background/60 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 transition-shadow focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/15"
                 />
               </div>
 
@@ -175,7 +199,7 @@ export function Contact() {
                   placeholder="Tell me a little about your project..."
                   value={form.message}
                   onChange={handleChange("message")}
-                  className="resize-none rounded-lg border border-border bg-background/60 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none"
+                  className="resize-none rounded-lg border border-border bg-background/60 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 transition-shadow focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/15"
                 />
               </div>
 

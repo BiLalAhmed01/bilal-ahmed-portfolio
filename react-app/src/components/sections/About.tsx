@@ -7,10 +7,16 @@ const FOCUS_AREAS = [
   { label: "Frontend", icon: Code2 },
 ];
 
-const STATS = [
-  { value: "2023", label: "Experience Since" },
-  { value: "11+", label: "Projects Shipped" },
-  { value: "4", label: "Companies" },
+interface Stat {
+  value: string;
+  label: string;
+  sub?: string;
+}
+
+const STATS: Stat[] = [
+  { value: "2+", label: "Years Experience", sub: "Since 2023" },
+  { value: "17+", label: "Projects Completed" },
+  { value: "6", label: "Clients" },
 ];
 
 export function About() {
@@ -46,6 +52,13 @@ export function About() {
                 into practical, scalable and user-friendly solutions.
               </p>
             </Reveal>
+            <Reveal direction="left" delay={0.18}>
+              <p className="mt-4 text-sm text-muted-foreground">
+                I'm Bilal Ahmed, an AI Engineer &amp; Web Developer based in Islamabad, Pakistan. Since 2023 I've
+                completed 17+ projects for 6 clients, and I'm open for opportunities worldwide, including fully
+                remote roles.
+              </p>
+            </Reveal>
 
             <Reveal direction="left" delay={0.21} className="mt-6 flex flex-wrap gap-2.5">
               {FOCUS_AREAS.map(({ label, icon: Icon }) => (
@@ -59,17 +72,25 @@ export function About() {
               ))}
             </Reveal>
 
+            <Reveal direction="left" delay={0.25} className="mt-8 flex items-center gap-2 text-xs text-muted-foreground">
+              <span className="h-1.5 w-1.5 flex-none animate-pulse rounded-full bg-primary shadow-[0_0_8px_rgba(172,139,86,0.6)]" />
+              Open for remote opportunities worldwide
+            </Reveal>
+
             <Reveal
               direction="left"
               delay={0.28}
-              className="mt-10 grid grid-cols-3 gap-4 border-t border-border pt-8"
+              className="mt-6 grid grid-cols-3 gap-4 border-t border-border pt-8"
             >
               {STATS.map((s) => (
-                <div key={s.label}>
+                <div key={s.label} className="min-w-0">
                   <span className="accent-text block text-2xl font-extrabold tracking-tight sm:text-3xl">
                     {s.value}
                   </span>
-                  <span className="mt-1 block text-xs text-muted-foreground">{s.label}</span>
+                  <span className="mt-1 block text-xs leading-snug text-muted-foreground">
+                    {s.label}
+                    {s.sub ? <span className="block text-[10px] text-muted-foreground/70">{s.sub}</span> : null}
+                  </span>
                 </div>
               ))}
             </Reveal>

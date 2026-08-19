@@ -125,32 +125,49 @@ export function Services() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [step, setStep] = useState(324);
+  const [maxScroll, setMaxScroll] = useState(0);
 
-  const total = SERVICES.length;
+  // Steps needed to reach the end of the track — not SERVICES.length. This
+  // viewport shows several cards at once (unlike Certifications, which shows
+  // one), so advancing per card all the way to the last index would strand it
+  // at the left edge with a viewport's worth of empty space beside it.
+  const maxIndex = Math.ceil(maxScroll / step);
+  const positions = maxIndex + 1;
 
-  // Measure actual card width + gap so the track shifts by exactly one card,
-  // and re-measure on resize (mobile card is 260px, sm+ is 300px, gap is 24px).
+  // Measure the real card width + gap so the track shifts by exactly one card
+  // (260px mobile, 300px sm+, 24px gap), plus the track's total overflow.
+  // ResizeObserver rather than a window resize listener so container-only
+  // width changes (e.g. a scrollbar appearing) are caught too.
   useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
     const measure = () => {
-      const firstCard = viewportRef.current?.querySelector<HTMLElement>("[data-service-card]");
-      if (firstCard) setStep(firstCard.offsetWidth + 24);
+      const firstCard = viewport.querySelector<HTMLElement>("[data-service-card]");
+      if (!firstCard) return;
+      const cardStep = firstCard.offsetWidth + 24;
+      const trackWidth = SERVICES.length * cardStep - 24;
+      const overflow = Math.max(0, trackWidth - viewport.clientWidth);
+      setStep(cardStep);
+      setMaxScroll(overflow);
+      // A wider viewport can leave the current index past the new end.
+      setIndex((i) => Math.min(i, Math.ceil(overflow / cardStep)));
     };
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    const observer = new ResizeObserver(measure);
+    observer.observe(viewport);
+    return () => observer.disconnect();
   }, []);
 
-  // Autoplay — pauses on hover and respects prefers-reduced-motion, same
-  // pattern as the Certifications carousel elsewhere on this site.
+  // Autoplay — pauses on hover/keyboard focus and respects
+  // prefers-reduced-motion, same pattern as the Certifications carousel.
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (paused || reducedMotion) return;
-    const id = setInterval(() => setIndex((i) => (i + 1) % total), AUTOPLAY_MS);
+    const id = setInterval(() => setIndex((i) => (i + 1) % positions), AUTOPLAY_MS);
     return () => clearInterval(id);
-  }, [paused, total]);
+  }, [paused, positions]);
 
-  const next = () => setIndex((i) => (i + 1) % total);
-  const prev = () => setIndex((i) => (i - 1 + total) % total);
+  const next = () => setIndex((i) => (i + 1) % positions);
+  const prev = () => setIndex((i) => (i - 1 + positions) % positions);
 
   return (
     <section id="services" className="relative overflow-hidden py-24">
@@ -158,17 +175,21 @@ export function Services() {
       <div className="relative z-10 mx-auto max-w-[1200px] px-6 md:px-8">
         <SectionHeader tag="05 / Services" title="AI, automation and web solutions that scale." />
 
+        {/* Pause wraps the whole carousel (same pattern as Certifications) so
+            the arrows — which sit outside the viewport in the DOM — also stop
+            the track moving under the pointer mid-click, and so tabbing into
+            the controls halts the motion for keyboard users. */}
+        <div
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocus={() => setPaused(true)}
+          onBlur={() => setPaused(false)}
+        >
         <Reveal tilt className="relative">
-          {/* pause-on-hover, same pattern as Certifications */}
-          <div
-            ref={viewportRef}
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-            className="overflow-hidden pb-4"
-          >
+          <div ref={viewportRef} className="overflow-hidden pb-4">
             <motion.div
               className="flex gap-6"
-              animate={{ x: -index * step }}
+              animate={{ x: -Math.min(index * step, maxScroll) }}
               transition={{ type: "spring", stiffness: 300, damping: 32 }}
             >
               {SERVICES.map((s, i) => (
@@ -183,7 +204,7 @@ export function Services() {
             type="button"
             onClick={prev}
             aria-label="Previous service"
-            className="absolute left-2 top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/50 text-white backdrop-blur-md transition-transform hover:scale-105 hover:bg-black/70 sm:flex"
+            className="absolute left-2 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/50 text-white backdrop-blur-md transition-transform hover:scale-105 hover:bg-black/70"
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -191,18 +212,21 @@ export function Services() {
             type="button"
             onClick={next}
             aria-label="Next service"
-            className="absolute right-2 top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/50 text-white backdrop-blur-md transition-transform hover:scale-105 hover:bg-black/70 sm:flex"
+            className="absolute right-2 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/50 text-white backdrop-blur-md transition-transform hover:scale-105 hover:bg-black/70"
           >
             <ArrowRight className="h-4 w-4" />
           </button>
 
+          {/* One dot per reachable track position, not per card — several
+              cards are on screen at once, so positions < SERVICES.length. */}
           <div className="mt-6 flex items-center gap-1.5">
-            {SERVICES.map((s, i) => (
+            {Array.from({ length: positions }, (_, i) => (
               <button
-                key={s.title}
+                key={i}
                 type="button"
                 onClick={() => setIndex(i)}
-                aria-label={`Go to ${s.title}`}
+                aria-label={`Go to services slide ${i + 1} of ${positions}`}
+                aria-current={i === index}
                 className={`h-1.5 rounded-full transition-all duration-200 ${
                   i === index ? "w-6 bg-primary" : "w-1.5 bg-border hover:bg-primary/50"
                 }`}
@@ -210,6 +234,7 @@ export function Services() {
             ))}
           </div>
         </Reveal>
+        </div>
       </div>
     </section>
   );

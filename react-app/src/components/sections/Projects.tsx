@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/icons/GithubIcon";
 import { Reveal } from "@/components/Reveal";
@@ -23,18 +23,8 @@ const CATEGORY_OVERLAY: Record<string, string> = {
   Web: "from-primary/15 via-transparent to-amber-300/10",
 };
 
-function calculateCardStyle(index: number, activeIndex: number, isMobile: boolean) {
+function calculateCardStyle(index: number, activeIndex: number) {
   const diff = index - activeIndex;
-
-  if (isMobile) {
-    return {
-      zIndex: 50 - Math.abs(diff),
-      transform: diff === 0 ? "translateY(0) scale(1)" : `translateY(${diff * 16}px) scale(${1 - Math.abs(diff) * 0.08})`,
-      opacity: Math.max(0, 1 - Math.abs(diff) * 0.35),
-      pointerEvents: Math.abs(diff) > 1 ? ("none" as const) : ("auto" as const),
-    };
-  }
-
   return {
     zIndex: 50 - Math.abs(diff),
     transform: diff === 0 ? "translateX(0) scale(1)" : `translateX(${diff * 58}%) scale(${1 - Math.abs(diff) * 0.16})`,
@@ -44,11 +34,96 @@ function calculateCardStyle(index: number, activeIndex: number, isMobile: boolea
   };
 }
 
+// Everything inside the "browser window" frame — preview image, category
+// badge, title/description/tags, and the counter+CTA footer. Shared by the
+// desktop absolute-stacked carousel card and the mobile single-card view so
+// the two layouts can never drift out of sync with each other's markup.
+function ProjectCardBody({
+  project,
+  index,
+  total,
+  tilt,
+}: {
+  project: Project;
+  index: number;
+  total: number;
+  tilt?: string;
+}) {
+  const link = primaryLink(project);
+
+  return (
+    <div
+      className="relative w-full min-w-0 overflow-hidden rounded-2xl border border-border bg-[linear-gradient(180deg,rgba(172,139,86,0.05)_0%,transparent_40%),var(--card)] shadow-[0_1px_2px_rgba(0,0,0,0.25),0_28px_56px_-24px_rgba(0,0,0,0.7)]"
+      style={{ transform: tilt ?? "none", transition: "transform 0.2s ease-out" }}
+    >
+      <div className="flex items-center gap-1.5 border-b border-primary/10 bg-black/40 px-4 py-2.5">
+        <span className="h-1.5 w-1.5 rounded-full bg-primary/35" />
+        <span className="h-1.5 w-1.5 rounded-full bg-primary/35" />
+        <span className="h-1.5 w-1.5 rounded-full bg-primary/35" />
+      </div>
+
+      <div className="relative aspect-[16/10] w-full overflow-hidden">
+        <img
+          src={project.image}
+          alt={`${project.title} — website preview`}
+          loading={index === 0 ? "eager" : "lazy"}
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover object-top"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70" />
+        <div
+          className={`absolute inset-0 bg-gradient-to-br ${CATEGORY_OVERLAY[project.category] ?? "from-primary/10 via-transparent to-primary/15"} mix-blend-overlay`}
+        />
+        <span className="absolute right-4 top-4 rounded-full border border-primary/20 bg-black/60 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-primary backdrop-blur-sm">
+          {project.category}
+        </span>
+      </div>
+
+      <div className="relative min-w-0 p-6 md:p-7">
+        <h3 className="min-w-0 break-words text-xl font-bold tracking-tight text-foreground md:text-2xl">
+          {project.title}
+        </h3>
+        <p className="mt-2 min-w-0 break-words text-sm leading-relaxed text-muted-foreground">
+          {project.shortDescription}
+        </p>
+
+        {project.technologies.length ? (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {project.technologies.map((t) => (
+              <span key={t} className="rounded-md bg-secondary/50 px-2.5 py-1 text-[11px] text-muted-foreground">
+                {t}
+              </span>
+            ))}
+          </div>
+        ) : null}
+
+        <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-5">
+          <span className="font-mono text-xs text-muted-foreground">
+            {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+          </span>
+          {link ? (
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground transition-transform hover:scale-105"
+            >
+              {link.label}
+              <LinkIcon kind={link.kind} className="h-3.5 w-3.5" />
+            </a>
+          ) : null}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function GalleryCard({
   project,
   index,
   activeIndex,
-  isMobile,
+  total,
   isHovering,
   mouse,
   reducedMotion,
@@ -57,14 +132,13 @@ function GalleryCard({
   project: Project;
   index: number;
   activeIndex: number;
-  isMobile: boolean;
+  total: number;
   isHovering: boolean;
   mouse: { x: number; y: number };
   reducedMotion: boolean;
   onSelect: (i: number) => void;
 }) {
   const isActive = index === activeIndex;
-  const link = primaryLink(project);
   const tilt =
     isActive && isHovering && !reducedMotion
       ? `perspective(1000px) rotateY(${mouse.x * 6}deg) rotateX(${-mouse.y * 6}deg)`
@@ -73,78 +147,12 @@ function GalleryCard({
   return (
     <motion.div
       className="absolute w-full max-w-lg cursor-pointer rounded-2xl"
-      style={{ ...calculateCardStyle(index, activeIndex, isMobile), transition: "all 0.5s cubic-bezier(0.19,1,0.22,1)" }}
+      style={{ ...calculateCardStyle(index, activeIndex), transition: "all 0.5s cubic-bezier(0.19,1,0.22,1)" }}
       whileHover={{ scale: isActive ? 1.015 : 1 }}
       transition={{ duration: 0.2 }}
       onClick={() => onSelect(index)}
     >
-      <div
-        className="relative w-full overflow-hidden rounded-2xl border border-border bg-[linear-gradient(180deg,rgba(172,139,86,0.05)_0%,transparent_40%),var(--card)] shadow-[0_1px_2px_rgba(0,0,0,0.25),0_28px_56px_-24px_rgba(0,0,0,0.7)]"
-        style={{ transform: tilt, transition: "transform 0.2s ease-out" }}
-      >
-        <div className="flex items-center gap-1.5 border-b border-primary/10 bg-black/40 px-4 py-2.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-primary/35" />
-          <span className="h-1.5 w-1.5 rounded-full bg-primary/35" />
-          <span className="h-1.5 w-1.5 rounded-full bg-primary/35" />
-        </div>
-
-        <div className="relative aspect-[16/10] w-full overflow-hidden">
-          <img
-            src={project.image}
-            alt={`${project.title} — website preview`}
-            loading={isActive ? "eager" : "lazy"}
-            decoding="async"
-            className="absolute inset-0 h-full w-full object-cover object-top"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70" />
-          <div
-            className={`absolute inset-0 bg-gradient-to-br ${CATEGORY_OVERLAY[project.category] ?? "from-primary/10 via-transparent to-primary/15"} mix-blend-overlay`}
-          />
-          <span className="absolute right-4 top-4 rounded-full border border-primary/20 bg-black/60 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-primary backdrop-blur-sm">
-            {project.category}
-          </span>
-        </div>
-
-        <div className="relative p-6 md:p-7">
-          <h3 className="text-xl font-bold tracking-tight text-foreground md:text-2xl">{project.title}</h3>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{project.shortDescription}</p>
-
-          {project.technologies.length ? (
-            <div className="mt-4 flex flex-wrap gap-2">
-              {project.technologies.map((t) => (
-                <span key={t} className="rounded-md bg-secondary/50 px-2.5 py-1 text-[11px] text-muted-foreground">
-                  {t}
-                </span>
-              ))}
-            </div>
-          ) : null}
-
-          {isActive ? (
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
-              className="mt-5 flex items-center justify-between border-t border-border pt-5"
-            >
-              <span className="font-mono text-xs text-muted-foreground">
-                {String(index + 1).padStart(2, "0")} / {String(PROJECTS.length).padStart(2, "0")}
-              </span>
-              {link ? (
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground transition-transform hover:scale-105"
-                >
-                  {link.label}
-                  <LinkIcon kind={link.kind} className="h-3.5 w-3.5" />
-                </a>
-              ) : null}
-            </motion.div>
-          ) : null}
-        </div>
-      </div>
+      <ProjectCardBody project={project} index={index} total={total} tilt={tilt} />
     </motion.div>
   );
 }
@@ -154,7 +162,6 @@ export function Projects() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
-  const [isMobile, setIsMobile] = useState(typeof window !== "undefined" ? window.innerWidth < 768 : false);
   const reducedMotion =
     typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const galleryRef = useRef<HTMLDivElement>(null);
@@ -170,12 +177,6 @@ export function Projects() {
     return () => {
       if (rafId.current !== null) cancelAnimationFrame(rafId.current);
     };
-  }, []);
-
-  useEffect(() => {
-    const onResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   const counts = useMemo(() => {
@@ -213,6 +214,8 @@ export function Projects() {
       setMouse({ x: (clientX - rect.left) / rect.width - 0.5, y: (clientY - rect.top) / rect.height - 0.5 });
     });
   }, []);
+
+  const activeProject = list[activeIndex];
 
   return (
     <section id="projects" className="relative overflow-hidden py-24">
@@ -255,27 +258,51 @@ export function Projects() {
         </Reveal>
 
         <Reveal tilt>
-        <div
-          ref={galleryRef}
-          onMouseMove={handleMouseMove}
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
-          className="relative flex h-[560px] w-full items-center justify-center md:h-[620px]"
-        >
-          {list.map((project, index) => (
-            <GalleryCard
-              key={project.id}
-              project={project}
-              index={index}
-              activeIndex={activeIndex}
-              isMobile={isMobile}
-              isHovering={isHovering}
-              mouse={mouse}
-              reducedMotion={reducedMotion}
-              onSelect={setActiveIndex}
-            />
-          ))}
-        </div>
+          {/* Mobile (< md): a single card in normal document flow — no
+             absolute stacking, so there is never more than one project's
+             markup mounted/visible at once. Height follows content instead
+             of a fixed box, so long descriptions/tag lists never clip or
+             spill outside the card. */}
+          <div className="md:hidden">
+            <AnimatePresence mode="wait" initial={false}>
+              {activeProject ? (
+                <motion.div
+                  key={activeProject.id}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  className="mx-auto w-full max-w-lg"
+                >
+                  <ProjectCardBody project={activeProject} index={activeIndex} total={list.length} />
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
+          </div>
+
+          {/* Desktop/tablet (md+): the original absolute-positioned, 3D
+             tilt-on-hover carousel gallery — unchanged. */}
+          <div
+            ref={galleryRef}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+            className="relative hidden h-[620px] w-full items-center justify-center md:flex"
+          >
+            {list.map((project, index) => (
+              <GalleryCard
+                key={project.id}
+                project={project}
+                index={index}
+                activeIndex={activeIndex}
+                total={list.length}
+                isHovering={isHovering}
+                mouse={mouse}
+                reducedMotion={reducedMotion}
+                onSelect={setActiveIndex}
+              />
+            ))}
+          </div>
         </Reveal>
 
         <div className="mt-8 flex items-center justify-center gap-6">

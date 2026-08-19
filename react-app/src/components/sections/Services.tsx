@@ -46,7 +46,7 @@ const SERVICES = [
 function ServiceCard({ service, delay }: { service: (typeof SERVICES)[number]; delay: number }) {
   const Icon = service.icon;
   const ref = useRef<HTMLDivElement>(null);
-  const [glow, setGlow] = useState({ x: 50, y: 50 });
+  const spotlightRef = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState(false);
 
   const rotateX = useMotionValue(0);
@@ -54,13 +54,19 @@ function ServiceCard({ service, delay }: { service: (typeof SERVICES)[number]; d
   const springX = useSpring(rotateX, { stiffness: 260, damping: 20 });
   const springY = useSpring(rotateY, { stiffness: 260, damping: 20 });
 
+  // Mutate the spotlight position directly on the DOM node instead of via
+  // React state — this ran on every native mousemove event (which can fire
+  // far faster than 60Hz), and setState there was forcing a full re-render
+  // of the card on each tick just to move a radial-gradient's center.
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
     const px = ((e.clientX - rect.left) / rect.width) * 100;
     const py = ((e.clientY - rect.top) / rect.height) * 100;
-    setGlow({ x: px, y: py });
+    if (spotlightRef.current) {
+      spotlightRef.current.style.background = `radial-gradient(circle at ${px}% ${py}%, rgba(${service.glow},0.35), transparent 60%)`;
+    }
     rotateY.set((px - 50) / 10);
     rotateX.set(-(py - 50) / 10);
   };
@@ -84,10 +90,11 @@ function ServiceCard({ service, delay }: { service: (typeof SERVICES)[number]; d
       >
         {/* cursor-tracked spotlight */}
         <div
+          ref={spotlightRef}
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           style={{
-            background: `radial-gradient(circle at ${glow.x}% ${glow.y}%, rgba(${service.glow},0.35), transparent 60%)`,
+            background: `radial-gradient(circle at 50% 50%, rgba(${service.glow},0.35), transparent 60%)`,
           }}
         />
         {/* diagonal shine sweep */}

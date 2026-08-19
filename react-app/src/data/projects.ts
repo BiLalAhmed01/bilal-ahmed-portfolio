@@ -25,7 +25,7 @@ export const PROJECTS: Project[] = [
     shortDescription:
       "AI accessibility and performance auditor that scans any website for WCAG failures and returns a prioritized, plain-language fix list.",
     technologies: ["Next.js", "AI/LLM", "WCAG"],
-    image: "/assets/project-a11ylens.png",
+    image: "/assets/project-a11ylens.webp",
     githubUrl: null,
     liveUrl: "https://a11ylens-nine.vercel.app/index.html",
   },
@@ -40,7 +40,7 @@ export const PROJECTS: Project[] = [
     shortDescription:
       "RAG-powered AI customer support agent that answers from an indexed knowledge base with a dashboard, conversation history, and analytics.",
     technologies: ["RAG", "Llama 3.3 70B", "Vector Search", "React"],
-    image: "/assets/project-orchis.png",
+    image: "/assets/project-orchis.webp",
     githubUrl: "https://github.com/BiLalAhmed01/AI-Customer-Support-Agent-RAG-",
     liveUrl: null,
   },
@@ -55,7 +55,7 @@ export const PROJECTS: Project[] = [
     shortDescription:
       "Instant AI lead-response tool for small businesses, answering missed calls and WhatsApp messages in seconds from their own FAQ and pricing.",
     technologies: ["AI/LLM", "WhatsApp API", "Automation"],
-    image: "/assets/project-firstreply.png",
+    image: "/assets/project-firstreply.webp",
     githubUrl: "https://github.com/BiLalAhmed01/FirstReply",
     liveUrl: null,
   },
@@ -70,7 +70,7 @@ export const PROJECTS: Project[] = [
     shortDescription:
       "Ethical AI job-application tailor that adapts a resume and cover letter to each role without fabricating experience.",
     technologies: ["AI/LLM", "Next.js"],
-    image: "/assets/project-tailorly.png",
+    image: "/assets/project-tailorly.webp",
     githubUrl: "https://github.com/BiLalAhmed01/Tailorly",
     liveUrl: null,
   },
@@ -85,7 +85,7 @@ export const PROJECTS: Project[] = [
     shortDescription:
       "WordPress platform for a UK-registered cultural & professional organization, handling event registration, ticketing, and international membership.",
     technologies: ["WordPress", "Elementor", "WooCommerce"],
-    image: "/assets/project-fv-organization.jpg",
+    image: "/assets/project-fv-organization.webp",
     githubUrl: null,
     liveUrl: "https://fvorganization.org.uk/home/",
   },
@@ -100,7 +100,7 @@ export const PROJECTS: Project[] = [
     shortDescription:
       "Editorial-style site for an Australian commercial real estate consultancy specializing in retail leasing strategy and development.",
     technologies: ["WordPress", "Elementor", "All in One SEO"],
-    image: "/assets/project-marked-property.jpg",
+    image: "/assets/project-marked-property.webp",
     githubUrl: null,
     liveUrl: "https://markedproperty.com.au/",
   },
@@ -115,7 +115,7 @@ export const PROJECTS: Project[] = [
     shortDescription:
       "WooCommerce fashion storefront for a footwear & accessories brand, with product variants, wishlists, and multi-category catalog browsing.",
     technologies: ["WordPress", "WooCommerce", "Elementor", "Slider Revolution"],
-    image: "/assets/project-biba-rang.jpg",
+    image: "/assets/project-biba-rang.webp",
     githubUrl: null,
     liveUrl: "https://bibarang.com/",
   },
@@ -130,7 +130,7 @@ export const PROJECTS: Project[] = [
     shortDescription:
       "Marketing site for a lead-generation service connecting real estate, mortgage, and debt-relief professionals with qualified prospects.",
     technologies: ["WordPress", "Elementor", "WooCommerce", "Site Kit by Google"],
-    image: "/assets/project-wecall.jpg",
+    image: "/assets/project-wecall.webp",
     githubUrl: null,
     liveUrl: "https://wecall.llc/",
   },
@@ -145,7 +145,7 @@ export const PROJECTS: Project[] = [
     shortDescription:
       "Local service business site for a licensed post-construction cleanup company serving Santa Barbara & San Luis Obispo counties, with quote-request flow.",
     technologies: ["WordPress", "Elementor", "All in One SEO", "Site Kit by Google"],
-    image: "/assets/project-coastal-valley.jpg",
+    image: "/assets/project-coastal-valley.webp",
     githubUrl: null,
     liveUrl: "https://constructioncleaning.biz/",
   },
@@ -160,7 +160,7 @@ export const PROJECTS: Project[] = [
     shortDescription:
       "B2B catalog site for a Sialkot-based sportswear manufacturer, showcasing custom team kits and apparel with bulk quote requests.",
     technologies: ["WordPress", "Elementor", "WooCommerce"],
-    image: "/assets/project-samab-international.jpg",
+    image: "/assets/project-samab-international.webp",
     githubUrl: null,
     liveUrl: "https://samabinternational.com/",
   },

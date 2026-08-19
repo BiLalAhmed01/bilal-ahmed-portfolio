@@ -17,7 +17,7 @@ const entries: TimelineEntry[] = [
     badge: "Degree",
     icon: GraduationCap,
     accent: goldAccent,
-    image: "/assets/uet-taxila.jpg",
+    image: "/assets/uet-taxila.webp",
   },
   {
     id: "scienta-vision",
@@ -27,7 +27,7 @@ const entries: TimelineEntry[] = [
     badge: "Pre-Engineering",
     icon: GraduationCap,
     accent: goldAccent,
-    image: "/assets/scienta-vision.jpg",
+    image: "/assets/scienta-vision.webp",
   },
   {
     id: "sls-montessori",
@@ -37,7 +37,7 @@ const entries: TimelineEntry[] = [
     badge: "Matriculation",
     icon: GraduationCap,
     accent: goldAccent,
-    image: "/assets/sls-montessori.jpg",
+    image: "/assets/sls-montessori.webp",
   },
 ];
 

@@ -54,6 +54,7 @@ export function Timeline({ entries }: { entries: TimelineEntry[] }) {
                         src={entry.image}
                         alt={`${entry.title} — ${entry.subtitle}`}
                         loading="lazy"
+                        decoding="async"
                         className="h-full w-full object-cover"
                       />
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />

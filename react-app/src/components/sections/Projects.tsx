@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/icons/GithubIcon";
@@ -158,6 +158,19 @@ export function Projects() {
   const reducedMotion =
     typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const galleryRef = useRef<HTMLDivElement>(null);
+  const rafId = useRef<number | null>(null);
+
+  // Cap tilt updates to one per animation frame instead of once per native
+  // mousemove event — high-poll-rate mice/trackpads can fire that event
+  // far faster than 60Hz, which was forcing a React re-render (and a
+  // recompute of every card's tilt transform) far more often than the
+  // screen could even show, causing visible jank while dragging the mouse
+  // across the gallery.
+  useEffect(() => {
+    return () => {
+      if (rafId.current !== null) cancelAnimationFrame(rafId.current);
+    };
+  }, []);
 
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth < 768);
@@ -189,11 +202,17 @@ export function Projects() {
   const next = () => setActiveIndex((p) => (p + 1) % list.length);
   const prev = () => setActiveIndex((p) => (p - 1 + list.length) % list.length);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!galleryRef.current) return;
-    const rect = galleryRef.current.getBoundingClientRect();
-    setMouse({ x: (e.clientX - rect.left) / rect.width - 0.5, y: (e.clientY - rect.top) / rect.height - 0.5 });
-  };
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+    if (rafId.current !== null) return;
+    rafId.current = requestAnimationFrame(() => {
+      rafId.current = null;
+      const rect = galleryRef.current?.getBoundingClientRect();
+      if (!rect) return;
+      setMouse({ x: (clientX - rect.left) / rect.width - 0.5, y: (clientY - rect.top) / rect.height - 0.5 });
+    });
+  }, []);
 
   return (
     <section id="projects" className="relative overflow-hidden py-24">

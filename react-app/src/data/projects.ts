@@ -25,7 +25,7 @@ export const PROJECTS: Project[] = [
     technologies: ["Next.js", "AI/LLM", "WCAG"],
     image: "/assets/project-a11ylens.webp",
     githubUrl: null,
-    liveUrl: "https://a11ylens-nine.vercel.app/index.html",
+    liveUrl: "https://aa11ylens.vercel.app/",
   },
   {
     id: "orchis",

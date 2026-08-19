@@ -125,7 +125,7 @@ export function Certifications() {
                       href={cert.pdf}
                       download={cert.downloadName}
                       aria-label={`Download ${cert.title} PDF`}
-                      className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+                      className="flex h-11 w-11 flex-none items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
                     >
                       <Download className="h-4 w-4" />
                     </a>
@@ -139,7 +139,7 @@ export function Certifications() {
                 type="button"
                 onClick={prev}
                 aria-label="Previous certificate"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
               >
                 <ArrowLeft className="h-4 w-4" />
               </button>
@@ -147,7 +147,7 @@ export function Certifications() {
                 type="button"
                 onClick={next}
                 aria-label="Next certificate"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
               >
                 <ArrowRight className="h-4 w-4" />
               </button>
@@ -168,8 +168,12 @@ export function Certifications() {
             </div>
           </div>
 
-          {/* ── Image panel ── */}
-          <div className="relative min-h-[280px] overflow-hidden md:min-h-[420px]">
+          {/* ── Image panel — certificate covers are all the same 1584×1224
+               aspect ratio, but this panel's own box doesn't match it, so
+               object-cover was cropping the certificate edges. object-contain
+               + a padded, brand-toned backdrop keeps the whole certificate
+               visible instead. ── */}
+          <div className="relative min-h-[280px] overflow-hidden bg-[radial-gradient(circle_at_50%_40%,color-mix(in_oklch,var(--secondary)_70%,var(--primary)_6%)_0%,var(--background)_75%)] md:min-h-[420px]">
             <AnimatePresence mode="sync">
               <motion.img
                 key={cert.id}
@@ -179,10 +183,10 @@ export function Certifications() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ opacity: { duration: 0.6 }, scale: { duration: AUTO_ADVANCE_MS / 1000, ease: "linear" } }}
-                className="absolute inset-0 h-full w-full object-cover"
+                className="absolute inset-0 h-full w-full rounded-lg object-contain p-6 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.6)] md:p-10"
               />
             </AnimatePresence>
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
 
             {/* decorative frame corners */}
             <span className="pointer-events-none absolute left-4 top-4 h-6 w-6 border-l-2 border-t-2 border-primary/60" />
@@ -223,7 +227,7 @@ export function Certifications() {
                   type="button"
                   onClick={() => setPreview(null)}
                   aria-label="Close certificate preview"
-                  className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground hover:bg-secondary hover:text-foreground"
+                  className="flex h-11 w-11 items-center justify-center rounded-full text-muted-foreground hover:bg-secondary hover:text-foreground"
                 >
                   <X className="h-4 w-4" />
                 </button>

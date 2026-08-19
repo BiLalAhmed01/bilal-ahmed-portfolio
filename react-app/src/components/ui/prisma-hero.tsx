@@ -160,7 +160,7 @@ const PrismaHero = () => {
                 className="text-xs text-primary/70 sm:text-sm md:text-base"
                 style={{ lineHeight: 1.2 }}
               >
-                AI Engineer building AI solutions, automation systems, web applications and SaaS products — turning ideas into intelligent, scalable digital products.
+                AI Engineer and web developer building AI agents, automation systems, and full-stack/WordPress websites — turning ideas into scalable digital products.
               </motion.p>
 
               <motion.a

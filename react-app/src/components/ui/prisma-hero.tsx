@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // Static poster shown before the background video decodes its first frame —
 // an inline SVG re-creating the same gradient + two glow blobs as the
@@ -100,8 +100,25 @@ export const WordsPullUpMultiStyle = ({ segments, className = "", style }: Words
 // page-level fixed <Nav> (Nav.tsx) is the site's single navigation, so this
 // component no longer renders its own — a second floating nav here would
 // just duplicate it.
+// True when the visitor has asked their browser/OS to conserve mobile data
+// (Chrome's Data Saver -> navigator.connection.saveData, or the standards
+// track prefers-reduced-data media feature). Read once at mount — this is
+// about respecting an explicit user preference, not something that should
+// silently change the video mid-session.
+function wantsReducedData(): boolean {
+  if (typeof navigator !== "undefined") {
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    if (connection?.saveData) return true;
+  }
+  if (typeof window !== "undefined" && window.matchMedia) {
+    return window.matchMedia("(prefers-reduced-data: reduce)").matches;
+  }
+  return false;
+}
+
 const PrismaHero = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [reducedData] = useState(wantsReducedData);
 
   // Pause the looping background video whenever the tab is backgrounded or
   // the hero scrolls out of view — it has no visual effect while hidden but
@@ -110,6 +127,11 @@ const PrismaHero = () => {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+
+    // Visitors asking to conserve mobile data get the static poster/fallback
+    // background instead of a forced 16MB fetch — same visual fallback this
+    // component already shows while the video is still loading.
+    if (reducedData) return;
 
     // Some mobile browsers (in-app webviews like Instagram/Facebook, some
     // Android builds with Data Saver on) still refuse the programmatic
@@ -151,7 +173,7 @@ const PrismaHero = () => {
       document.removeEventListener("touchstart", retryOnGesture);
       document.removeEventListener("click", retryOnGesture);
     };
-  }, []);
+  }, [reducedData]);
 
   return (
     <section className="h-full w-full">
@@ -175,11 +197,11 @@ const PrismaHero = () => {
         {/* Background video */}
         <video
           ref={videoRef}
-          autoPlay
+          autoPlay={!reducedData}
           loop
           muted
           playsInline
-          preload="auto"
+          preload={reducedData ? "metadata" : "auto"}
           poster={HERO_POSTER}
           disablePictureInPicture
           disableRemotePlayback

@@ -4,6 +4,7 @@ import { GithubIcon } from "@/components/icons/GithubIcon";
 import { InstagramIcon } from "@/components/icons/InstagramIcon";
 import { Reveal } from "@/components/Reveal";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
+import { SocialIconButton } from "@/components/SocialIconButton";
 
 // Formspree endpoint for this site's contact form — https://formspree.io/f/<id>
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xaewlknp";
@@ -97,31 +98,9 @@ export function Contact() {
             </Reveal>
 
             <Reveal direction="left" delay={0.18} className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-3">
-              <a
-                href="https://github.com/BiLalAhmed01"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary hover:shadow-[0_0_16px_rgba(172,139,86,0.25)]"
-              >
-                <GithubIcon className="h-4 w-4" />
-              </a>
-              <a
-                href="https://www.instagram.com/devxbilal/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary hover:shadow-[0_0_16px_rgba(172,139,86,0.25)]"
-              >
-                <InstagramIcon className="h-4 w-4" />
-              </a>
-              <a
-                href="mailto:ch.bilal.ahmed595@gmail.com"
-                aria-label="Email"
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary hover:shadow-[0_0_16px_rgba(172,139,86,0.25)]"
-              >
-                <Mail className="h-4 w-4" />
-              </a>
+              <SocialIconButton href="https://github.com/BiLalAhmed01" label="GitHub" icon={GithubIcon} />
+              <SocialIconButton href="https://www.instagram.com/devxbilal/" label="Instagram" icon={InstagramIcon} />
+              <SocialIconButton href="mailto:ch.bilal.ahmed595@gmail.com" label="Email" icon={Mail} />
               <span className="ml-1 flex items-center gap-2 text-xs text-muted-foreground">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary shadow-[0_0_8px_rgba(172,139,86,0.6)]" />
                 Usually replies within 24 hours

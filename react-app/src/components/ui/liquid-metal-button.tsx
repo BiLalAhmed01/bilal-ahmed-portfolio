@@ -106,6 +106,12 @@ export function LiquidMetalButton({
               u_shape: 1,
               u_offsetX: 0.1,
               u_offsetY: -0.1,
+              // Site's gold accent (#ac8b56) as a color-burn tint over the
+              // metal, and the actual dark background color behind it, so
+              // the shader reads as "brand gold metal" instead of the
+              // library's default plain chrome/silver.
+              u_colorTint: [0.9569, 0.8824, 0.5216, 0.9],
+              u_colorBack: [0.1647, 0.1255, 0.0824, 1],
             },
             undefined,
             0.6,
@@ -206,7 +212,7 @@ export function LiquidMetalButton({
               <Sparkles
                 size={16}
                 style={{
-                  color: "#666666",
+                  color: "#f4ecd8",
                   filter: "drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.5))",
                   transition: "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
                   transform: "scale(1)",
@@ -217,7 +223,7 @@ export function LiquidMetalButton({
               <span
                 style={{
                   fontSize: "14px",
-                  color: "#666666",
+                  color: "#f4ecd8",
                   fontWeight: 400,
                   textShadow: "0px 1px 2px rgba(0, 0, 0, 0.5)",
                   transition: "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
@@ -250,7 +256,7 @@ export function LiquidMetalButton({
                 height: `${dimensions.innerHeight}px`,
                 margin: "2px",
                 borderRadius: "100px",
-                background: "linear-gradient(180deg, #202020 0%, #000000 100%)",
+                background: "linear-gradient(180deg, #3d2f18 0%, #0f0b04 100%)",
                 boxShadow: isPressed
                   ? "inset 0px 2px 4px rgba(0, 0, 0, 0.4), inset 0px 1px 2px rgba(0, 0, 0, 0.3)"
                   : "none",

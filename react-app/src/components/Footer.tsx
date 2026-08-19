@@ -2,6 +2,7 @@ import { Mail, MapPin, ArrowUp, ArrowUpRight } from "lucide-react";
 import { GithubIcon } from "@/components/icons/GithubIcon";
 import { InstagramIcon } from "@/components/icons/InstagramIcon";
 import { TextHoverEffect } from "@/components/TextHoverEffect";
+import { SocialIconButton } from "@/components/SocialIconButton";
 
 const NAV_LINKS = [
   { href: "#about", label: "About" },
@@ -99,16 +100,7 @@ export function Footer() {
 
             <div className="mt-5 flex items-center gap-3">
               {SOCIALS.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target={s.href.startsWith("http") ? "_blank" : undefined}
-                  rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  aria-label={s.label}
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary hover:shadow-[0_0_16px_rgba(172,139,86,0.25)]"
-                >
-                  <s.icon className="h-4 w-4" />
-                </a>
+                <SocialIconButton key={s.label} href={s.href} label={s.label} icon={s.icon} />
               ))}
             </div>
           </div>

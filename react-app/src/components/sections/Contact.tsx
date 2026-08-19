@@ -195,15 +195,14 @@ export function Contact() {
                 />
               </div>
 
-              <div
-                className={`self-center ${status === "sending" ? "pointer-events-none opacity-70" : ""}`}
-              >
+              <div className={`self-center ${status === "sending" ? "opacity-70" : ""}`}>
                 {/* The button's underlying <button> has no explicit type, so
                     inside this <form> it defaults to type="submit" and still
                     triggers the real onSubmit handler above. */}
                 <LiquidMetalButton
                   label={status === "sending" ? "Sending…" : status === "sent" ? "Message sent" : "Send Message"}
                   width={168}
+                  disabled={status === "sending"}
                 />
               </div>
 

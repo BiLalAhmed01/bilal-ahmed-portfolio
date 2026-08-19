@@ -39,6 +39,28 @@ describe("Contact", () => {
     });
   });
 
+  it("disables the submit button while a submission is in flight, so a second Enter can't fire a duplicate POST", async () => {
+    const fetchMock = fetch as unknown as ReturnType<typeof vi.fn>;
+    let resolveFetch: (value: { ok: boolean; status: number }) => void = () => {};
+    fetchMock.mockReturnValueOnce(new Promise((resolve) => (resolveFetch = resolve)));
+
+    const user = userEvent.setup();
+    const { container } = render(<Contact />);
+    await fillForm(user, container.querySelector("form")!);
+
+    const submitButton = screen.getByRole("button", { name: "Send Message" });
+    await user.click(submitButton);
+
+    const sendingButton = screen.getByRole("button", { name: "Sending…" });
+    expect(sendingButton).toBeDisabled();
+
+    await user.keyboard("{Enter}");
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+
+    resolveFetch({ ok: true, status: 200 });
+    await waitFor(() => expect(screen.getByRole("status")).toHaveTextContent("Thanks"));
+  });
+
   it("shows an error message when Formspree responds with a failure status", async () => {
     const fetchMock = fetch as unknown as ReturnType<typeof vi.fn>;
     fetchMock.mockResolvedValueOnce({ ok: false, status: 500 });

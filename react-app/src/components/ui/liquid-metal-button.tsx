@@ -11,6 +11,10 @@ interface LiquidMetalButtonProps {
    *  which only fits short labels like "Get Started". Real CTAs vary in
    *  length, so this is exposed per-instance instead of hardcoded. */
   width?: number;
+  /** Blocks the underlying <button> via the real `disabled` attribute (not
+   *  just a CSS pointer-events guard), so keyboard activation (Enter/Space)
+   *  is blocked the same as a mouse click. */
+  disabled?: boolean;
 }
 
 export function LiquidMetalButton({
@@ -18,6 +22,7 @@ export function LiquidMetalButton({
   onClick,
   viewMode = "text",
   width,
+  disabled = false,
 }: LiquidMetalButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
@@ -313,6 +318,7 @@ export function LiquidMetalButton({
 
           <button
             ref={buttonRef}
+            disabled={disabled}
             onClick={handleClick}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -326,7 +332,7 @@ export function LiquidMetalButton({
               height: `${dimensions.height}px`,
               background: "transparent",
               border: "none",
-              cursor: "pointer",
+              cursor: disabled ? "default" : "pointer",
               outline: "none",
               zIndex: 40,
               transformStyle: "preserve-3d",

@@ -125,6 +125,18 @@
   html, body {
     overflow-x: hidden;
     }
+  section[id] {
+    /* Matches the fixed nav's h-[72px], plus the same responsive step used
+       for #home's own pt-[80px]/md:pt-[88px] (App.tsx), so anchor-jumping
+       to any section (nav links, footer links, #contact) doesn't land the
+       section's heading underneath the opaque nav bar. */
+    scroll-margin-top: 80px;
+    }
+  @media (min-width: 768px) {
+    section[id] {
+      scroll-margin-top: 88px;
+      }
+    }
   body {
     @apply bg-background text-foreground;
     }

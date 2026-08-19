@@ -2,6 +2,14 @@ import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useRef } from "react";
 
+// Static poster shown before the background video decodes its first frame —
+// an inline SVG re-creating the same gradient + two glow blobs as the
+// fallback layers below, so there's no visual mismatch/flash between poster
+// and fallback while the video (a third-party CDN URL, load time unknown)
+// is still loading. No new binary asset — kept as a data URI.
+const HERO_POSTER =
+  "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%221600%22%20height%3D%22900%22%20viewBox%3D%220%200%201600%20900%22%3E%0A%3Cdefs%3E%0A%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%230d0c0a%22/%3E%0A%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%23070706%22/%3E%0A%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%230a0908%22/%3E%0A%3C/linearGradient%3E%0A%3CradialGradient%20id%3D%22glowA%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2250%25%22%3E%0A%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgb%28172%2C139%2C86%29%22%20stop-opacity%3D%220.35%22/%3E%0A%3Cstop%20offset%3D%2270%25%22%20stop-color%3D%22rgb%28172%2C139%2C86%29%22%20stop-opacity%3D%220%22/%3E%0A%3C/radialGradient%3E%0A%3CradialGradient%20id%3D%22glowB%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2250%25%22%3E%0A%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgb%28172%2C139%2C86%29%22%20stop-opacity%3D%220.2%22/%3E%0A%3Cstop%20offset%3D%2270%25%22%20stop-color%3D%22rgb%28172%2C139%2C86%29%22%20stop-opacity%3D%220%22/%3E%0A%3C/radialGradient%3E%0A%3C/defs%3E%0A%3Crect%20width%3D%221600%22%20height%3D%22900%22%20fill%3D%22url%28%23bg%29%22/%3E%0A%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%22420%22%20fill%3D%22url%28%23glowA%29%22/%3E%0A%3Ccircle%20cx%3D%221600%22%20cy%3D%22900%22%20r%3D%22360%22%20fill%3D%22url%28%23glowB%29%22/%3E%0A%3C/svg%3E";
+
 /* ---------------- WordsPullUp ---------------- */
 interface WordsPullUpProps {
   text: string;
@@ -118,6 +126,8 @@ const PrismaHero = () => {
           loop
           muted
           playsInline
+          preload="metadata"
+          poster={HERO_POSTER}
           className="absolute inset-0 h-full w-full object-cover"
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4"
         />

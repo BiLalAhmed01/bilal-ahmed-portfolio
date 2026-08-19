@@ -8,7 +8,7 @@ const FOCUS_AREAS = [
 ];
 
 const STATS = [
-  { value: "2+", label: "Years Experience" },
+  { value: "2023", label: "Experience Since" },
   { value: "11+", label: "Projects Shipped" },
   { value: "4", label: "Companies" },
 ];

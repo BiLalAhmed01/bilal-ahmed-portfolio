@@ -202,7 +202,7 @@ export function Projects() {
         <Reveal className="mb-10 max-w-2xl">
           <span className="text-xs font-medium uppercase tracking-[0.08em] text-primary">04 / Selected Work</span>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-            Selected<span className="accent-text ml-2">Work</span>
+            Selected <span className="accent-text">Work</span>
           </h2>
           <p className="mt-3 text-muted-foreground">
             A selection of websites, digital products, AI-powered applications and intelligent solutions I've

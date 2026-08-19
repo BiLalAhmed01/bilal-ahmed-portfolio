@@ -32,6 +32,9 @@ export function Certifications() {
   const reducedMotion =
     typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
 
   const total = CERTIFICATIONS.length;
   const cert = CERTIFICATIONS[index];
@@ -50,14 +53,37 @@ export function Certifications() {
 
   useEffect(() => {
     if (!preview) return;
+
+    closeButtonRef.current?.focus();
+
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setPreview(null);
+      if (e.key === "Escape") {
+        setPreview(null);
+        return;
+      }
+      if (e.key !== "Tab" || !dialogRef.current) return;
+
+      const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      triggerRef.current?.focus();
     };
   }, [preview]);
 
@@ -116,7 +142,10 @@ export function Certifications() {
                     </a>
                     <button
                       type="button"
-                      onClick={() => setPreview(cert)}
+                      onClick={(e) => {
+                        triggerRef.current = e.currentTarget;
+                        setPreview(cert);
+                      }}
                       className="rounded-full border border-border px-4 py-2 text-xs font-semibold text-foreground transition-colors hover:border-primary"
                     >
                       View PDF
@@ -212,6 +241,7 @@ export function Certifications() {
               aria-hidden="true"
             />
             <motion.div
+              ref={dialogRef}
               role="dialog"
               aria-modal="true"
               aria-label={preview.title}
@@ -224,6 +254,7 @@ export function Certifications() {
               <div className="flex items-center justify-between border-b border-border px-5 py-4">
                 <span className="font-semibold text-foreground">{preview.title}</span>
                 <button
+                  ref={closeButtonRef}
                   type="button"
                   onClick={() => setPreview(null)}
                   aria-label="Close certificate preview"

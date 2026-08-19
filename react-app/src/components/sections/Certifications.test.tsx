@@ -37,4 +37,17 @@ describe("Certifications", () => {
     await user.keyboard("{Escape}");
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
   });
+
+  it("moves focus into the dialog on open and restores it to the trigger on close", async () => {
+    const user = userEvent.setup();
+    render(<Certifications />);
+
+    const trigger = screen.getByRole("button", { name: "View PDF" });
+    await user.click(trigger);
+
+    expect(screen.getByRole("button", { name: "Close certificate preview" })).toHaveFocus();
+
+    await user.keyboard("{Escape}");
+    await waitFor(() => expect(trigger).toHaveFocus());
+  });
 });

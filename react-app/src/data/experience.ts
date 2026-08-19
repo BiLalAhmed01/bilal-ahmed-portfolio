@@ -1,23 +1,19 @@
 export interface ExperienceEntry {
-  index: string;
   role: string;
   company: string;
   date: string;
   type: "Remote" | "Onsite" | "Hybrid";
   location?: string;
-  featured?: boolean;
   bullets: string[];
   tags: string[];
 }
 
 export const EXPERIENCE: ExperienceEntry[] = [
   {
-    index: "01",
     role: "Software Developer",
     company: "RoboSoft Works",
     date: "Jun 2025 — Present",
     type: "Remote",
-    featured: true,
     bullets: [
       "Design, develop, and maintain responsive, SEO-friendly websites, including e-commerce, portfolio, corporate, and service provider websites, by customizing themes, templates, layouts, and UI components to improve performance, accessibility, and user experience.",
       "Develop and troubleshoot custom web solutions using WordPress, Elementor, HTML, CSS, JavaScript, and REST APIs, delivering tailored functionality for client requirements and building feature-rich websites for businesses across multiple industries, with transferable experience in theme-based platforms such as Shopify.",
@@ -27,7 +23,6 @@ export const EXPERIENCE: ExperienceEntry[] = [
     tags: ["WordPress", "Elementor", "HTML", "CSS", "JavaScript", "REST APIs", "Python", "Google Gemini", "Git", "GitHub", "SEO", "Automation"],
   },
   {
-    index: "02",
     role: "Supervisor QA",
     company: "PTCL",
     date: "Jan 2026 — Present",
@@ -41,7 +36,6 @@ export const EXPERIENCE: ExperienceEntry[] = [
     tags: ["Quality Assurance", "Technical Auditing", "Technical Inspections", "Documentation", "Reporting", "Troubleshooting", "Process Compliance", "Technical Operations"],
   },
   {
-    index: "03",
     role: "Software Developer",
     company: "NESCOM Collaboration Project",
     date: "Nov 2024 — Nov 2025",
@@ -56,7 +50,6 @@ export const EXPERIENCE: ExperienceEntry[] = [
     tags: ["Python", "Machine Learning", "MATLAB", "DSP", "GUI"],
   },
   {
-    index: "04",
     role: "Web Development Summer Intern",
     company: "InfinityBits",
     date: "Jun 2023 — Aug 2023",

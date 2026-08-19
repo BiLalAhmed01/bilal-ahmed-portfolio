@@ -24,8 +24,7 @@ export function Reveal({
   /** Overrides the default 24px travel distance for a more pronounced reveal. */
   distance?: number;
   /** Scroll-scrubbed 3D tilt-in, adapted from Aceternity's ContainerScroll
-   *  technique (see components/ui/container-scroll-animation.tsx) — the
-   *  element rotates/scales in continuously as it scrolls through the
+   *  technique — the element rotates/scales in continuously as it scrolls through the
    *  bottom third of the viewport, rather than firing once on entry.
    *  Reserved for a section's one primary visual anchor (a card, panel, or
    *  carousel) — applying it to every Reveal instance (badges, list rows)

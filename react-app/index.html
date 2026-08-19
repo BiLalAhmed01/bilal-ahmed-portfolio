@@ -162,20 +162,6 @@
       </main>
     </noscript>
 
-    <!--
-      Static replica of the Contact form, hidden from users. Netlify Forms
-      detects forms at build time by scanning static HTML — a form rendered
-      only by React at runtime is invisible to that scan. This markup exists
-      solely so Netlify registers the "contact" form; the real, interactive
-      form lives in Contact.tsx and submits to it via fetch.
-    -->
-    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
-      <input type="text" name="name" />
-      <input type="email" name="email" />
-      <input type="text" name="subject" />
-      <textarea name="message"></textarea>
-      <input name="bot-field" />
-    </form>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

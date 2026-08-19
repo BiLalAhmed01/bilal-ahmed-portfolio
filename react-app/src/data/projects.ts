@@ -4,7 +4,6 @@ export interface Project {
   title: string;
   category: string;
   categories: string[];
-  featured: boolean;
   priority: number;
   shortDescription: string;
   technologies: string[];
@@ -20,7 +19,6 @@ export const PROJECTS: Project[] = [
     title: "A11yLens",
     category: "AI & Automation",
     categories: ["AI & Automation"],
-    featured: true,
     priority: 1,
     shortDescription:
       "AI accessibility and performance auditor that scans any website for WCAG failures and returns a prioritized, plain-language fix list.",
@@ -35,7 +33,6 @@ export const PROJECTS: Project[] = [
     title: "Orchis",
     category: "AI & Automation",
     categories: ["AI & Automation"],
-    featured: true,
     priority: 2,
     shortDescription:
       "RAG-powered AI customer support agent that answers from an indexed knowledge base with a dashboard, conversation history, and analytics.",
@@ -50,7 +47,6 @@ export const PROJECTS: Project[] = [
     title: "FirstReply",
     category: "AI & Automation",
     categories: ["AI & Automation"],
-    featured: true,
     priority: 3,
     shortDescription:
       "Instant AI lead-response tool for small businesses, answering missed calls and WhatsApp messages in seconds from their own FAQ and pricing.",
@@ -65,7 +61,6 @@ export const PROJECTS: Project[] = [
     title: "Tailorly",
     category: "AI & Automation",
     categories: ["AI & Automation"],
-    featured: true,
     priority: 4,
     shortDescription:
       "Ethical AI job-application tailor that adapts a resume and cover letter to each role without fabricating experience.",
@@ -80,7 +75,6 @@ export const PROJECTS: Project[] = [
     title: "FV Organization",
     category: "Web",
     categories: ["Web"],
-    featured: true,
     priority: 5,
     shortDescription:
       "WordPress platform for a UK-registered cultural & professional organization, handling event registration, ticketing, and international membership.",
@@ -95,7 +89,6 @@ export const PROJECTS: Project[] = [
     title: "Marked Property",
     category: "Web",
     categories: ["Web"],
-    featured: true,
     priority: 6,
     shortDescription:
       "Editorial-style site for an Australian commercial real estate consultancy specializing in retail leasing strategy and development.",
@@ -110,7 +103,6 @@ export const PROJECTS: Project[] = [
     title: "Biba Rang",
     category: "Web",
     categories: ["Web"],
-    featured: false,
     priority: 7,
     shortDescription:
       "WooCommerce fashion storefront for a footwear & accessories brand, with product variants, wishlists, and multi-category catalog browsing.",
@@ -125,7 +117,6 @@ export const PROJECTS: Project[] = [
     title: "WeCall LLC",
     category: "Web",
     categories: ["Web"],
-    featured: true,
     priority: 8,
     shortDescription:
       "Marketing site for a lead-generation service connecting real estate, mortgage, and debt-relief professionals with qualified prospects.",
@@ -140,7 +131,6 @@ export const PROJECTS: Project[] = [
     title: "Coastal Valley Construction Cleaning",
     category: "Web",
     categories: ["Web"],
-    featured: false,
     priority: 9,
     shortDescription:
       "Local service business site for a licensed post-construction cleanup company serving Santa Barbara & San Luis Obispo counties, with quote-request flow.",
@@ -155,7 +145,6 @@ export const PROJECTS: Project[] = [
     title: "Samab International",
     category: "Web",
     categories: ["Web"],
-    featured: false,
     priority: 10,
     shortDescription:
       "B2B catalog site for a Sialkot-based sportswear manufacturer, showcasing custom team kits and apparel with bulk quote requests.",

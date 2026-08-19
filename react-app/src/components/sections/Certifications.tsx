@@ -42,11 +42,11 @@ export function Certifications() {
 
   useEffect(() => {
     if (paused || reducedMotion || preview) return;
-    timerRef.current = setInterval(next, AUTO_ADVANCE_MS);
+    timerRef.current = setInterval(() => setIndex((i) => (i + 1) % total), AUTO_ADVANCE_MS);
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [paused, reducedMotion, preview]);
+  }, [paused, reducedMotion, preview, total]);
 
   useEffect(() => {
     if (!preview) return;

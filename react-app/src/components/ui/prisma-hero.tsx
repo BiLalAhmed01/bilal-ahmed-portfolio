@@ -111,10 +111,28 @@ const PrismaHero = () => {
     const video = videoRef.current;
     if (!video) return;
 
+    // Some mobile browsers (in-app webviews like Instagram/Facebook, some
+    // Android builds with Data Saver on) still refuse the programmatic
+    // play() call even though the element is muted + playsInline + autoplay.
+    // Setting `muted` as a JS property (not just the JSX attribute) matches
+    // what those browsers actually check, and retrying play() on the first
+    // touch/click recovers the rest without needing a visible "tap to play"
+    // control or a heavier preload.
+    video.muted = true;
+
     let isIntersecting = true;
+    const retryOnGesture = () => {
+      video.play().catch(() => {});
+    };
     const sync = () => {
-      if (isIntersecting && !document.hidden) video.play().catch(() => {});
-      else video.pause();
+      if (isIntersecting && !document.hidden) {
+        video.play().catch(() => {
+          document.addEventListener("touchstart", retryOnGesture, { once: true, passive: true });
+          document.addEventListener("click", retryOnGesture, { once: true });
+        });
+      } else {
+        video.pause();
+      }
     };
 
     const io = new IntersectionObserver(
@@ -130,6 +148,8 @@ const PrismaHero = () => {
     return () => {
       io.disconnect();
       document.removeEventListener("visibilitychange", sync);
+      document.removeEventListener("touchstart", retryOnGesture);
+      document.removeEventListener("click", retryOnGesture);
     };
   }, []);
 
@@ -159,7 +179,7 @@ const PrismaHero = () => {
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
           poster={HERO_POSTER}
           disablePictureInPicture
           disableRemotePlayback

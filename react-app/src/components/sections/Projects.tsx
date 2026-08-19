@@ -160,6 +160,11 @@ function GalleryCard({
 export function Projects() {
   const [category, setCategory] = useState("All");
   const [activeIndex, setActiveIndex] = useState(0);
+  const [prevCategory, setPrevCategory] = useState(category);
+  if (category !== prevCategory) {
+    setPrevCategory(category);
+    setActiveIndex(0);
+  }
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const reducedMotion =
@@ -195,10 +200,6 @@ export function Projects() {
       ),
     [category]
   );
-
-  useEffect(() => {
-    setActiveIndex(0);
-  }, [category]);
 
   const next = () => setActiveIndex((p) => (p + 1) % list.length);
   const prev = () => setActiveIndex((p) => (p - 1 + list.length) % list.length);

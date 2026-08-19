@@ -78,14 +78,16 @@ export function Nav() {
             {l.label}
           </a>
         ))}
-        <LiquidMetalButton
-          label="Let's Talk"
-          width={140}
-          onClick={() => {
-            setOpen(false);
-            goToContact();
-          }}
-        />
+        {open && (
+          <LiquidMetalButton
+            label="Let's Talk"
+            width={140}
+            onClick={() => {
+              setOpen(false);
+              goToContact();
+            }}
+          />
+        )}
       </div>
     </>
   );

@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 // Static poster shown before the background video decodes its first frame —
 // an inline SVG re-creating the same gradient + two glow blobs as the
@@ -101,6 +101,38 @@ export const WordsPullUpMultiStyle = ({ segments, className = "", style }: Words
 // component no longer renders its own — a second floating nav here would
 // just duplicate it.
 const PrismaHero = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Pause the looping background video whenever the tab is backgrounded or
+  // the hero scrolls out of view — it has no visual effect while hidden but
+  // would otherwise keep decoding frames and burning CPU/battery for the
+  // rest of the session.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    let isIntersecting = true;
+    const sync = () => {
+      if (isIntersecting && !document.hidden) video.play().catch(() => {});
+      else video.pause();
+    };
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        isIntersecting = entry.isIntersecting;
+        sync();
+      },
+      { threshold: 0 }
+    );
+    io.observe(video);
+    document.addEventListener("visibilitychange", sync);
+
+    return () => {
+      io.disconnect();
+      document.removeEventListener("visibilitychange", sync);
+    };
+  }, []);
+
   return (
     <section className="h-full w-full">
       <div className="relative h-full w-full overflow-hidden rounded-2xl md:rounded-[2rem]">
@@ -122,6 +154,7 @@ const PrismaHero = () => {
 
         {/* Background video */}
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
